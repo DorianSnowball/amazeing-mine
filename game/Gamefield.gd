@@ -202,9 +202,8 @@ func scroll():
     
     dwarf.position.y -= tile_basesize*tile_scaling
     
-    
-    
     drawField()
+    $"../Score".increaseScore()
 
 var itemProb = 0.75
 func generateTileItem(row):
