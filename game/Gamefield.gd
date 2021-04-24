@@ -168,7 +168,8 @@ func getCord(x,y):
 func arrow_pressed(pos):
     print(pos)
     var selected_tile = get_node("../ItemList").get_selected_tile()
-    get_node("../ItemList").select(0,true)
+    if selected_tile == null:
+        return
     if pos.x == 0: # left row button pressed
         insertRow(true, pos.y-1, selected_tile)
     if pos.x == fieldsize_width+1: # right row button pressed
