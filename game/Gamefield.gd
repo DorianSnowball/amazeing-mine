@@ -6,11 +6,16 @@ var tile_end_piece = load("res://Tile_End_Piece.tscn")
 var tile_T_piece = load("res://Tile_T_Piece.tscn")
 var tile_intersection = load("res://Tile_Intersection.tscn")
 
+var arrow_button = load("res://Arrow_Button.tscn")
+
 var tile_list = [tile_tube, tile_corner, tile_end_piece, tile_T_piece, tile_intersection]
 
 # Declare member variables here. Examples:
-var fieldsize_width : int = 15
+var fieldsize_width : int = 5
 var fieldsize_height : int = 5
+
+var tile_scaling = 2
+var tile_basesize = 64
 
 var field : = []
 
@@ -28,6 +33,7 @@ func _ready():
             field[x][y]=0
             
     # draw field and test insert functions
+    generateRandomField()
     drawField()
     spawnDwarf()
     #insertCol(true,2,1)
@@ -65,51 +71,95 @@ func insertCol(top, col, tile):
         i[col] = row[j]
         j+=1
     
-            
-    
-func drawField():
+func generateRandomField():
     randomize()
     tile_list.shuffle()
     var i = 0
     var j = 0
-    $".".get_children().clear()
     for row in field:
         for node in row:
-            var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
-            tile.position = Vector2(j*192+96,i*192+96)
+           
             
-            if randi() % 2 == 1:
-                tile.scale.y *= -1
+            field[i][j] = getRandomTile()
+            j+=1
+        i+=1
+        j=0
+
+func getRandomTile():
+    var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
+    tile.scale = Vector2(tile_scaling, tile_scaling)
+    
+    if randi() % 2 == 1:
+        tile.scale.y *= -1
+    
+    if randi() % 2 == 1:
+        tile.scale.x *= -1
+    
+    tile.rotate((randi() % 4)* 1.5707963268)
+    return tile
+    
+func drawField():
+    var i = 0
+    var j = 0
+    $".".get_children().clear()
+    
+    
+    # draw arrows
+    for x in range(fieldsize_width + 2):
+        for y in range(fieldsize_height + 2):
+            var arrow: Node2D = arrow_button.instance()
+            var button: TextureButton = arrow.get_child(0)
+            button.connect("pressed", self, "arrow_pressed", [Vector2(x,y)])
+
+            arrow.position = Vector2(x*(tile_basesize*tile_scaling), y*(tile_basesize*tile_scaling))
+            if x==0 and y in range(1,fieldsize_height+1): # left col    
+                arrow.rotation_degrees = -90
+                arrow.position.x += tile_basesize / 2
+                $".".add_child(arrow)
+            if y == 0 and x in range(1,fieldsize_width+1): # top row
+                arrow.position.y += tile_basesize / 2
+                $".".add_child(arrow)
+            if x == fieldsize_width+1 and y in range(1, fieldsize_height+1): # right col
+                arrow.rotation_degrees = 90
+                arrow.position.x -= tile_basesize / 2
+                $".".add_child(arrow)
+            if y == fieldsize_height+1 and x in range(1,fieldsize_width+1): # bot row
+                arrow.rotation_degrees = 180
+                arrow.position.y -= tile_basesize / 2
+                $".".add_child(arrow)
+                
+    # draw tiles
+    for row in field:
+        for node in row:
+
+            node.position = Vector2((j+0.5)*(tile_basesize*tile_scaling)+tile_basesize,(i+0.5)*(tile_basesize*tile_scaling)+tile_basesize)
             
-            if randi() % 2 == 1:
-                tile.scale.x *= -1
-            
-            tile.rotate((randi() % 4)* 1.5707963268)
-            
-            
-            $".".add_child(tile)
+            $".".add_child(node)
             j+=1
         i+=1
         j=0
     
 func spawnDwarf():
     var dwarf = load("res://Dwarf.tscn").instance()
-    dwarf.position = Vector2(32, 32)
+    dwarf.position = Vector2(32+(tile_basesize*tile_scaling), 32+(tile_basesize*tile_scaling))
+    print(getCord(dwarf.position.x, dwarf.position.y))
     $".".add_child(dwarf)
-    #for row in field:
-        #for node in row:
-        #	#var sprite = $Tile_Corner
-        #	var sprite = Sprite.new()
-        #	sprite.texture = load(getTileTextureById(node))
-        #	sprite.position = Vector2(j*64+32,i*64+32)
-        #	
-        #	$".".add_child(sprite)
-        #	j+=1
-        #i+=1
-        #j=0
 
-func getTileTextureById(id):
-    return "res://Sprites/tile"+str(id)+".png"
+func getRow(y):
+    return int(y-tile_basesize) / (tile_basesize * tile_scaling)
+    
+func getCol(x):
+    return int(x-tile_basesize) / (tile_basesize * tile_scaling)
+    
+func getCord(x,y):
+    return Vector2(getCol(x), getRow(y))
+    
+func arrow_pressed(pos):
+    if pos.x == 0: # left row button pressed
+        print("left row")
+        
+    
+    
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

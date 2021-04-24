@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ld48"
-run/main_scene="res://Gamefield.tscn"
+run/main_scene="res://MainUI.tscn"
 config/icon="res://icon.png"
 
 [display]
