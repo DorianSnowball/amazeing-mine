@@ -79,7 +79,7 @@ func generateRandomField():
     for row in field:
         for node in row:            
 
-            field[i][j] = getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100))
+            field[i][j] = getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100), true)
             j+=1
         i+=1
         j=0
@@ -94,7 +94,7 @@ func generateRandomField():
     $".".add_child(starting_tile)
     
 
-func getRandomTile(pos):
+func getRandomTile(pos, spawn):
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
     tile.scale = Vector2(tile_scaling, tile_scaling)
     tile.position = pos
@@ -106,7 +106,8 @@ func getRandomTile(pos):
         tile.scale.x *= -1
     
     tile.rotate((randi() % 4)* 1.5707963268)
-    $".".add_child(tile)
+    if spawn:
+        $".".add_child(tile)
     return tile
     
 func drawArrows():
@@ -177,6 +178,7 @@ func arrow_pressed(pos):
     var selected_tile = get_node("../ItemList").get_selected_tile()
     if selected_tile == null:
         return
+    add_child(selected_tile)
     if pos.x == 0: # left row button pressed
         insertRow(true, pos.y-1, selected_tile)
     if pos.x == fieldsize_width+1: # right row button pressed
@@ -193,8 +195,8 @@ func scroll():
     # add new last row
     scrolling = true
     var row = []
-    for _i in range(fieldsize_width):
-        row.append(getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100)))
+    for i in range(fieldsize_width):
+        row.append(getRandomTile(Vector2(64+(i+0.5)*tile_scaling*tile_basesize,fieldsize_height*tile_scaling*tile_basesize+100),true))
         
     var old = field.pop_front()
     for tile in old:
