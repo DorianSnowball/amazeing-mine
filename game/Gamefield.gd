@@ -77,13 +77,17 @@ func generateRandomField():
     var i = 0
     var j = 0
     for row in field:
-        for node in row:
-           
-            
+        for node in row:            
             field[i][j] = getRandomTile()
             j+=1
         i+=1
         j=0
+    
+    # hardcoding the starting tile
+    var starting_tile = tile_end_piece.instance()
+    starting_tile.rotate(-1.5707963268)
+    starting_tile.scale = Vector2(tile_scaling, tile_scaling)
+    field[0][0] = starting_tile
 
 func getRandomTile():
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
