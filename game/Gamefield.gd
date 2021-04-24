@@ -78,20 +78,25 @@ func generateRandomField():
     for row in field:
         for node in row:            
 
-            field[i][j] = getRandomTile()
+            field[i][j] = getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100))
             j+=1
         i+=1
         j=0
     
     # hardcoding the starting tile
+    $".".remove_child(field[0][0])
     var starting_tile = tile_end_piece.instance()
     starting_tile.rotate(-1.5707963268)
     starting_tile.scale = Vector2(tile_scaling, tile_scaling)
+    starting_tile.position = Vector2(0,0)
     field[0][0] = starting_tile
+    $".".add_child(starting_tile)
+    
 
-func getRandomTile():
+func getRandomTile(pos):
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
     tile.scale = Vector2(tile_scaling, tile_scaling)
+    tile.position = pos
     
     if randi() % 2 == 1:
         tile.scale.y *= -1
@@ -100,6 +105,7 @@ func getRandomTile():
         tile.scale.x *= -1
     
     tile.rotate((randi() % 4)* 1.5707963268)
+    $".".add_child(tile)
     return tile
     
 func drawArrows():
@@ -135,10 +141,17 @@ func drawField():
     for row in field:
         for node in row:
 
-            node.position = Vector2((j+0.5)*(tile_basesize*tile_scaling)+tile_basesize,(i+0.5)*(tile_basesize*tile_scaling)+tile_basesize)
+            var TweenNode: Tween = node.get_node("Tween")
+            var newPos = Vector2((j+0.5)*(tile_basesize*tile_scaling)+tile_basesize, (i+0.5)*(tile_basesize*tile_scaling)+tile_basesize)
             
-            if node.get_parent() == null:
-                $".".add_child(node)
+            
+#            if node.get_parent() == null:
+#                var spawnPos = Vector2((j-1.0)*(tile_basesize*tile_scaling)+tile_basesize, (i-1.0)*(tile_basesize*tile_scaling)+tile_basesize)
+#                node.position = spawnPos
+#                $".".add_child(node)
+            #else:
+            TweenNode.interpolate_property(node,"position", node.position, newPos, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT) 
+            TweenNode.start()
                 
             j+=1
         i+=1
@@ -150,24 +163,25 @@ func spawnDwarf():
     dwarf.position = Vector2(32+(tile_basesize*tile_scaling), 32+(tile_basesize*tile_scaling))
     $".".add_child(dwarf)
 
-#func getRow(y):
-#    return int(y-tile_basesize) / (tile_basesize * tile_scaling)
-#
-#func getCol(x):
-#    return int(x-tile_basesize) / (tile_basesize * tile_scaling)
-#
-#func getCord(x,y):
-#    return Vector2(getCol(x), getRow(y))
+func getRow(y):
+    return int(y-tile_basesize) / (tile_basesize * tile_scaling)
+
+func getCol(x):
+    return int(x-tile_basesize) / (tile_basesize * tile_scaling)
+
+func getCord(x,y):
+    return Vector2(getCol(x), getRow(y))
     
 func arrow_pressed(pos):
+#    Vector2(tile_basesize*tile_scaling/2,(pos.y-1)*tile_basesize*tile_scaling)
     if pos.x == 0: # left row button pressed
-        insertRow(true, pos.y-1, getRandomTile())
+        insertRow(true, pos.y-1, getRandomTile(Vector2(0,0)))
     if pos.x == fieldsize_width+1: # right row button pressed
-        insertRow(false, pos.y-1, getRandomTile())
+        insertRow(false, pos.y-1, getRandomTile(Vector2(0,0)))
     if pos.y == 0: # top row button pressed
-        insertCol(true, pos.x-1, getRandomTile())
+        insertCol(true, pos.x-1, getRandomTile(Vector2(0,0)))
     if pos.y == fieldsize_height + 1: # bot row button pressed
-        insertCol(false, pos.x-1, getRandomTile())
+        insertCol(false, pos.x-1, getRandomTile(Vector2(0,0)))
     
 func scroll():
     # remove first row
@@ -175,7 +189,7 @@ func scroll():
     
     var row = []
     for i in range(fieldsize_width):
-        row.append(getRandomTile())
+        row.append(getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100)))
         
     var old = field.pop_front()
     for tile in old:
