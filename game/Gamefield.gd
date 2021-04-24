@@ -37,13 +37,6 @@ func _ready():
     drawArrows()
     drawField()
     spawnDwarf()
-    #insertCol(true,2,1)
-    #yield(get_tree().create_timer(2.0),"timeout")
-    #drawField()
-    #insertCol(false,3,1)
-    #insertCol(true,2,0)
-    #yield(get_tree().create_timer(2.0),"timeout")
-    #drawField()
 
 func insertRow(left, rowIdx, tile):
     var row = field[rowIdx]
@@ -151,23 +144,22 @@ func drawField():
         i+=1
         j=0
     
+var dwarf = null
 func spawnDwarf():
-    var dwarf = load("res://Dwarf.tscn").instance()
+    dwarf = load("res://Dwarf.tscn").instance()
     dwarf.position = Vector2(32+(tile_basesize*tile_scaling), 32+(tile_basesize*tile_scaling))
-    print(getCord(dwarf.position.x, dwarf.position.y))
     $".".add_child(dwarf)
 
-func getRow(y):
-    return int(y-tile_basesize) / (tile_basesize * tile_scaling)
-    
-func getCol(x):
-    return int(x-tile_basesize) / (tile_basesize * tile_scaling)
-    
-func getCord(x,y):
-    return Vector2(getCol(x), getRow(y))
+#func getRow(y):
+#    return int(y-tile_basesize) / (tile_basesize * tile_scaling)
+#
+#func getCol(x):
+#    return int(x-tile_basesize) / (tile_basesize * tile_scaling)
+#
+#func getCord(x,y):
+#    return Vector2(getCol(x), getRow(y))
     
 func arrow_pressed(pos):
-    print(pos)
     if pos.x == 0: # left row button pressed
         insertRow(true, pos.y-1, getRandomTile())
     if pos.x == fieldsize_width+1: # right row button pressed
@@ -176,6 +168,22 @@ func arrow_pressed(pos):
         insertCol(true, pos.x-1, getRandomTile())
     if pos.y == fieldsize_height + 1: # bot row button pressed
         insertCol(false, pos.x-1, getRandomTile())
+    
+func scroll():
+    # remove first row
+    # add new last row
+    
+    var row = []
+    for i in range(fieldsize_width):
+        row.append(getRandomTile())
+        
+    var old = field.pop_front()
+    for tile in old:
+        $".".remove_child(tile)
+        
+    field.push_back(row)
+    dwarf.position.y -= tile_basesize*tile_scaling
+    drawField()
     
     
 
