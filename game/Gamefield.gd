@@ -8,7 +8,7 @@ var tile_intersection = load("res://Tile_Intersection.tscn")
 
 var arrow_button = load("res://Arrow_Button.tscn")
 
-var tile_list = [tile_tube, tile_corner, tile_end_piece, tile_T_piece, tile_intersection]
+var tile_list = [tile_tube, tile_corner, tile_T_piece, tile_intersection]
 
 # Declare member variables here. Examples:
 var fieldsize_width : int = 5
