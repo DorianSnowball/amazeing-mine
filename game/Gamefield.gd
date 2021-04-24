@@ -34,6 +34,7 @@ func _ready():
             
     # draw field and test insert functions
     generateRandomField()
+    drawArrows()
     drawField()
     spawnDwarf()
     #insertCol(true,2,1)
@@ -44,32 +45,37 @@ func _ready():
     #yield(get_tree().create_timer(2.0),"timeout")
     #drawField()
 
-func insertRow(left, row, tile):
-    row = field[row]
+func insertRow(left, rowIdx, tile):
+    var row = field[rowIdx]
     if left:
         row.push_front(tile)
-        row.pop_back()
+        $".".remove_child(row.pop_back())
     else:
         row.push_back(tile)
-        row.pop_front()
+        $".".remove_child(row.pop_front())
+
+    drawField()
         
-func insertCol(top, col, tile):
-    var row = [tile]
+func insertCol(top, colIdx, tile):
+    var col = []
     for i in field:
-        if top:
-            row.push_back(i[col])
-        else:
-            row.push_front(i[col])
+        col.push_back(i[colIdx])
+        
+    if top:
+        col.push_front(tile)
+    else:
+        col.push_back(tile)
     
     if top:
-        row.pop_back()
+        $".".remove_child(col.pop_back())
     else:
-        row.pop_front()
+        $".".remove_child(col.pop_front())
     
     var j = 0
     for i in field:
-        i[col] = row[j]
+        i[colIdx] = col[j]
         j+=1
+    drawField()
     
 func generateRandomField():
     randomize()
@@ -77,18 +83,22 @@ func generateRandomField():
     var i = 0
     var j = 0
     for row in field:
-        for node in row:
-           
-            
+        for node in row:            
+
             field[i][j] = getRandomTile()
             j+=1
         i+=1
         j=0
+    
+    # hardcoding the starting tile
+    var starting_tile = tile_end_piece.instance()
+    starting_tile.rotate(-1.5707963268)
+    starting_tile.scale = Vector2(tile_scaling, tile_scaling)
+    field[0][0] = starting_tile
 
 func getRandomTile():
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
     tile.scale = Vector2(tile_scaling, tile_scaling)
-    
     if randi() % 2 == 1:
         tile.scale.y *= -1
     
@@ -98,12 +108,7 @@ func getRandomTile():
     tile.rotate((randi() % 4)* 1.5707963268)
     return tile
     
-func drawField():
-    var i = 0
-    var j = 0
-    $".".get_children().clear()
-    
-    
+func drawArrows():
     # draw arrows
     for x in range(fieldsize_width + 2):
         for y in range(fieldsize_height + 2):
@@ -128,13 +133,19 @@ func drawField():
                 arrow.position.y -= tile_basesize / 2
                 $".".add_child(arrow)
                 
+func drawField():
+    var i = 0
+    var j = 0
+       
     # draw tiles
     for row in field:
         for node in row:
 
             node.position = Vector2((j+0.5)*(tile_basesize*tile_scaling)+tile_basesize,(i+0.5)*(tile_basesize*tile_scaling)+tile_basesize)
             
-            $".".add_child(node)
+            if node.get_parent() == null:
+                $".".add_child(node)
+                
             j+=1
         i+=1
         j=0
@@ -155,9 +166,17 @@ func getCord(x,y):
     return Vector2(getCol(x), getRow(y))
     
 func arrow_pressed(pos):
+    print(pos)
+    var selected_tile = get_node("../ItemList").get_selected_tile()
+    get_node("../ItemList").select(0,true)
     if pos.x == 0: # left row button pressed
-        print("left row")
-        
+        insertRow(true, pos.y-1, selected_tile)
+    if pos.x == fieldsize_width+1: # right row button pressed
+        insertRow(false, pos.y-1, selected_tile)
+    if pos.y == 0: # top row button pressed
+        insertCol(true, pos.x-1, selected_tile)
+    if pos.y == fieldsize_height + 1: # bot row button pressed
+        insertCol(false, pos.x-1, selected_tile)
     
     
 

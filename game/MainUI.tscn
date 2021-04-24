@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Gamefield.tscn" type="PackedScene" id=1]
-[ext_resource path="res://stuff.tscn" type="PackedScene" id=2]
 [ext_resource path="res://InvList.tscn" type="PackedScene" id=3]
 
 [node name="Control" type="Control"]
@@ -10,8 +9,6 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="stuff" parent="." instance=ExtResource( 2 )]
 
 [node name="Gamefield" parent="." instance=ExtResource( 1 )]
 
