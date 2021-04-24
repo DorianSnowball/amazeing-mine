@@ -63,6 +63,7 @@ func _physics_process(delta):
 func checkScroll():
     if get_parent().getRow(position.y) > 1:
         get_parent().scroll()
+        velocity.y = 0
   
 #    if previous_frame_floor != is_on_floor() and vel_y == 13:                   #will only trigger once
 #        print(is_on_floor())

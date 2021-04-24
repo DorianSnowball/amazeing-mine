@@ -36,6 +36,7 @@ func _ready():
     generateRandomField()
     drawArrows()
     drawField()
+    yield(get_tree().create_timer(0.75), "timeout")
     spawnDwarf()
 
 func insertRow(left, rowIdx, tile):
@@ -183,10 +184,11 @@ func arrow_pressed(pos):
     if pos.y == fieldsize_height + 1: # bot row button pressed
         insertCol(false, pos.x-1, getRandomTile(Vector2(0,0)))
     
+var scrolling = false
 func scroll():
     # remove first row
     # add new last row
-    
+
     var row = []
     for i in range(fieldsize_width):
         row.append(getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100)))
@@ -198,6 +200,7 @@ func scroll():
     field.push_back(row)
     dwarf.position.y -= tile_basesize*tile_scaling
     drawField()
+ 
     
     
 
