@@ -190,17 +190,28 @@ func scroll():
     # add new last row
 
     var row = []
-    for i in range(fieldsize_width):
+    for _i in range(fieldsize_width):
         row.append(getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100)))
         
     var old = field.pop_front()
     for tile in old:
         $".".remove_child(tile)
         
+    generateTileItem(row)
     field.push_back(row)
+    
     dwarf.position.y -= tile_basesize*tile_scaling
+    
+    
+    
     drawField()
- 
+
+var itemProb = 0.75
+func generateTileItem(row):
+    if randf() < itemProb:
+        var tile = row[randi() % row.size()]
+        
+        tile.add_child(load("res://TileItem.tscn").instance())
     
     
 

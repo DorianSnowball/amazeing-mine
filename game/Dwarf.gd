@@ -40,11 +40,11 @@ func get_input():
     if Input.is_action_just_pressed("jump") and is_on_floor():
         velocity.y -= jumpforce
         if velocity.x < 0:                                                      # backflip city
-            for x in range(30): #16
+            for _x in range(30): #16
                 _animated_sprite.rotation_degrees += 360/30  #22.5
                 yield(get_tree().create_timer(0.4/30),"timeout")
         elif velocity.x >= 0:
-            for x in range(30): #16
+            for _x in range(30): #16
                 _animated_sprite.rotation_degrees -= 360/30  #22.5
                 yield(get_tree().create_timer(0.4/30),"timeout")
 
