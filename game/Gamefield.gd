@@ -9,7 +9,7 @@ var tile_intersection = load("res://Tile_Intersection.tscn")
 var tile_list = [tile_tube, tile_corner, tile_end_piece, tile_T_piece, tile_intersection]
 
 # Declare member variables here. Examples:
-var fieldsize_width : int = 15
+var fieldsize_width : int = 5
 var fieldsize_height : int = 5
 
 var field : = []
@@ -28,6 +28,7 @@ func _ready():
             field[x][y]=0
             
     # draw field and test insert functions
+    generateRandomField()
     drawField()
     spawnDwarf()
     #insertCol(true,2,1)
@@ -65,17 +66,14 @@ func insertCol(top, col, tile):
         i[col] = row[j]
         j+=1
     
-            
-    
-func drawField():
+func generateRandomField():
+    randomize()
     tile_list.shuffle()
     var i = 0
     var j = 0
-    $".".get_children().clear()
     for row in field:
         for node in row:
             var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
-            tile.position = Vector2(j*192+96,i*192+96)
             
             if randi() % 2 == 1:
                 tile.scale.y *= -1
@@ -85,8 +83,23 @@ func drawField():
             
             tile.rotate((randi() % 4)* 1.5707963268)
             
+            field[i][j] = tile
+            j+=1
+        i+=1
+        j=0
+
+    
+func drawField():
+    
+    var i = 0
+    var j = 0
+    $".".get_children().clear()
+    for row in field:
+        for node in row:
+
+            node.position = Vector2(j*192+96,i*192+96)
             
-            $".".add_child(tile)
+            $".".add_child(node)
             j+=1
         i+=1
         j=0
