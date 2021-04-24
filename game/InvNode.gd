@@ -78,7 +78,7 @@ func get_selected_tile():
     
 func gen_inv():
     for i in range(start_tiles):
-        add_tile($"../Gamefield".getRandomTile(Vector2(0,0)))
+        add_tile($"../Gamefield".getRandomTile(Vector2(0,0), false))
 
 func _ready():
     dimensions = get_viewport().get_viewport().size
