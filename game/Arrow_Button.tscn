@@ -10,6 +10,7 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.5
 margin_bottom = 32.0
+shortcut_in_tooltip = false
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
 __meta__ = {

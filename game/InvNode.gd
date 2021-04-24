@@ -21,6 +21,7 @@ func add_button(indx):
     var button: TextureButton = arrow.get_child(0)
     
     button.texture_normal = null
+    button.texture_pressed = null
     arrow.scale = Vector2(tile_scaling, tile_scaling)
     
     #scale fuckery
@@ -34,6 +35,8 @@ func add_button(indx):
             arrow.position = Vector2(prev.position.x + padding_tiles + (tile_basesize * tile_scaling),prev.position.y)
     $".".add_child(arrow)
     
+    #bg
+        
     #button fuckery
     button.connect("pressed",self,"inv_button",[indx])
 
@@ -56,11 +59,14 @@ func add_tile(tile):
     inv.append(tile)
     if len(inv) <= button_count:
         inv_to_buttons()
-    
+
     
 func inv_button(indx):
     var tile : KinematicBody2D = inv[indx]
+    inv_to_buttons()
+    get_child(indx).scale *= 1.5
     clicked = indx
+    
     
 func gen_buttons():
     for i in range(button_count):
@@ -86,17 +92,3 @@ func _ready():
         tile_scaling = 2
     gen_buttons()
     gen_inv()
-    
-    
-    
-    #var arrow: Node2D = arrow_button.instance()
-    #var button: TextureButton = arrow.get_child(0)
-    
-    #button.texture_normal = load("res://Sprites/Tile_Corner_Piece.png")
-    
-    #dimensions = get_viewport().get_viewport().size
-    
-    #arrow.scale = Vector2(tile_scaling, tile_scaling)
-    #arrow.rotate(1.5)
-    #arrow.position = Vector2(dimensions.y - (tile_basesize*tile_scaling)+tile_basesize,(tile_basesize*tile_scaling)+tile_basesize)
-    #$".".add_child(arrow)
