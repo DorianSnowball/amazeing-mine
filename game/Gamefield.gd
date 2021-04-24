@@ -215,7 +215,7 @@ func scroll():
     scrolling = false
     
 
-var itemProb = 0.75
+var itemProb = 0.5
 func generateTileItem(row):
     if randf() < itemProb:
         var tile = row[randi() % row.size()]
