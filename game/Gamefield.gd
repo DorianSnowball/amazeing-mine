@@ -10,12 +10,15 @@ var field = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    # init 2d array
     for x in range(fieldsize_width):
         field.append([])
         field[x]=[]        
         for y in range(fieldsize_height):
             field[x].append([])
             field[x][y]=0
+            
+    # draw field and test insert functions
     drawField()
     insertCol(true,2,1)
     yield(get_tree().create_timer(2.0),"timeout")
@@ -24,7 +27,6 @@ func _ready():
     insertCol(true,2,0)
     yield(get_tree().create_timer(2.0),"timeout")
     drawField()
-    pass # Replace with function body.
 
 func insertRow(left, row, tile):
     row = field[row]
