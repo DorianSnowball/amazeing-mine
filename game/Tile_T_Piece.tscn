@@ -8,7 +8,7 @@ extents = Vector2( 32, 8 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Tile_T_Piece" type="KinematicBody2D"]
 
 [node name="Tile_T_Piece" type="Sprite" parent="."]
 texture = ExtResource( 1 )
