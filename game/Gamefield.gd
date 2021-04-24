@@ -219,8 +219,13 @@ var itemProb = 0.5
 func generateTileItem(row):
     if randf() < itemProb:
         var tile = row[randi() % row.size()]
-        
-        tile.add_child(load("res://TileItem.tscn").instance())
+        var chest = load("res://TileItem.tscn").instance()
+        chest.rotation = -tile.rotation
+        if tile.scale.x < 0:
+            chest.scale.x *= -1
+        elif tile.scale.y < 0:
+            chest.scale.y *= -1
+        tile.add_child(chest)
 
     
     
