@@ -61,12 +61,9 @@ func _physics_process(delta):
     checkScroll()
     
 func checkScroll():
-    if getRow(position.y) > 1:
+    if get_parent().getRow(position.y) > 1:
         get_parent().scroll()
-
-func getRow(y):
-    return int(y-get_parent().tile_basesize) / (get_parent().tile_basesize * get_parent().tile_scaling)
-    
+  
 #    if previous_frame_floor != is_on_floor() and vel_y == 13:                   #will only trigger once
 #        print(is_on_floor())
 #        print(previous_frame_floor)
