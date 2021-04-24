@@ -68,6 +68,7 @@ func insertCol(top, col, tile):
             
     
 func drawField():
+    randomize()
     tile_list.shuffle()
     var i = 0
     var j = 0
