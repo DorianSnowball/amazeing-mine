@@ -98,7 +98,7 @@ func getRandomTile(pos):
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
     tile.scale = Vector2(tile_scaling, tile_scaling)
     tile.position = pos
-    
+
     if randi() % 2 == 1:
         tile.scale.y *= -1
     
@@ -174,15 +174,18 @@ func getCord(x,y):
     return Vector2(getCol(x), getRow(y))
     
 func arrow_pressed(pos):
-#    Vector2(tile_basesize*tile_scaling/2,(pos.y-1)*tile_basesize*tile_scaling)
+    var selected_tile = get_node("../ItemList").get_selected_tile()
+    if selected_tile == null:
+        return
     if pos.x == 0: # left row button pressed
-        insertRow(true, pos.y-1, getRandomTile(Vector2(0,0)))
+        insertRow(true, pos.y-1, selected_tile)
     if pos.x == fieldsize_width+1: # right row button pressed
-        insertRow(false, pos.y-1, getRandomTile(Vector2(0,0)))
+        insertRow(false, pos.y-1, selected_tile)
     if pos.y == 0: # top row button pressed
-        insertCol(true, pos.x-1, getRandomTile(Vector2(0,0)))
+        insertCol(true, pos.x-1, selected_tile)
     if pos.y == fieldsize_height + 1: # bot row button pressed
-        insertCol(false, pos.x-1, getRandomTile(Vector2(0,0)))
+        insertCol(false, pos.x-1, selected_tile)
+
     
 var scrolling = false
 func scroll():
@@ -211,6 +214,7 @@ func generateTileItem(row):
         var tile = row[randi() % row.size()]
         
         tile.add_child(load("res://TileItem.tscn").instance())
+
     
     
 

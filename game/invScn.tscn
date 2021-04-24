@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="inv" type="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1360.0
+margin_bottom = 768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 738.58
+margin_top = 63.9803
+margin_right = 802.58
+margin_bottom = 127.98
+rect_rotation = 0.773627
+rect_scale = Vector2( -3.31013, 3.07161 )
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+margin_left = 1052.89
+margin_top = 63.9803
+margin_right = 1116.89
+margin_bottom = 127.98
+rect_rotation = 0.773627
+rect_scale = Vector2( -3.31013, 3.07161 )
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton3" type="TextureButton" parent="."]
+margin_left = 1314.81
+margin_top = 67.1551
+margin_right = 1378.81
+margin_bottom = 131.155
+rect_rotation = 0.773627
+rect_scale = Vector2( -3.31013, 3.07161 )
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton4" type="TextureButton" parent="."]
+margin_left = 1316.39
+margin_top = 300.503
+margin_right = 1380.39
+margin_bottom = 364.503
+rect_rotation = 0.773627
+rect_scale = Vector2( -3.31013, 3.07161 )
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
