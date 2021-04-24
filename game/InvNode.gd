@@ -80,6 +80,7 @@ func get_selected_tile():
     inv.remove(clicked)
     inv_to_buttons()
     clicked = 0
+    get_child(0).scale *= 1.5
     return tile
     
 func gen_inv():
