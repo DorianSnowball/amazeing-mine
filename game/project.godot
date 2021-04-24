@@ -8,10 +8,15 @@
 
 config_version=4
 
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
 [application]
 
 config/name="ld48"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Gamefield.tscn"
 config/icon="res://icon.png"
 
 [input]
