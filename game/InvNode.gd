@@ -57,6 +57,7 @@ func inv_to_buttons():
     
 func add_tile(tile):
     inv.append(tile)
+    $"../InvCounter".modify_items(true)
     if len(inv) <= button_count:
         inv_to_buttons()
 
@@ -81,11 +82,13 @@ func get_selected_tile():
     inv_to_buttons()
     clicked = 0
     get_child(0).scale *= 1.5
+    $"../InvCounter".modify_items(false)
     return tile
     
 func gen_inv():
     for i in range(start_tiles):
         add_tile($"../Gamefield".getRandomTile(Vector2(0,0), false))
+    get_child(0).scale *= 1.5        
 
 func _ready():
     dimensions = get_viewport().get_viewport().size
