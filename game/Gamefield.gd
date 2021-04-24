@@ -99,7 +99,6 @@ func getRandomTile():
     return tile
     
 func drawField():
-    
     var i = 0
     var j = 0
     $".".get_children().clear()
