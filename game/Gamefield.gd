@@ -191,7 +191,7 @@ var scrolling = false
 func scroll():
     # remove first row
     # add new last row
-
+    scrolling = true
     var row = []
     for _i in range(fieldsize_width):
         row.append(getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100)))
@@ -206,9 +206,12 @@ func scroll():
     
     
     drawField()
-    dwarf.position.y -= tile_basesize*tile_scaling
-    
     $"../Score".increaseScore()
+    #dwarf.position.y -= tile_basesize*tile_scaling
+    
+    yield(get_tree().create_timer(0.5), "timeout")
+    scrolling = false
+    
 
 var itemProb = 0.75
 func generateTileItem(row):
