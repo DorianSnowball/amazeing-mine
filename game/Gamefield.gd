@@ -36,14 +36,8 @@ func _ready():
     generateRandomField()
     drawArrows()
     drawField()
+    yield(get_tree().create_timer(0.75), "timeout")
     spawnDwarf()
-    #insertCol(true,2,1)
-    #yield(get_tree().create_timer(2.0),"timeout")
-    #drawField()
-    #insertCol(false,3,1)
-    #insertCol(true,2,0)
-    #yield(get_tree().create_timer(2.0),"timeout")
-    #drawField()
 
 func insertRow(left, rowIdx, tile):
     var row = field[rowIdx]
@@ -85,20 +79,26 @@ func generateRandomField():
     for row in field:
         for node in row:            
 
-            field[i][j] = getRandomTile()
+            field[i][j] = getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100))
             j+=1
         i+=1
         j=0
     
     # hardcoding the starting tile
+    $".".remove_child(field[0][0])
     var starting_tile = tile_end_piece.instance()
     starting_tile.rotate(-1.5707963268)
     starting_tile.scale = Vector2(tile_scaling, tile_scaling)
+    starting_tile.position = Vector2(0,0)
     field[0][0] = starting_tile
+    $".".add_child(starting_tile)
+    
 
-func getRandomTile():
+func getRandomTile(pos):
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
     tile.scale = Vector2(tile_scaling, tile_scaling)
+    tile.position = pos
+
     if randi() % 2 == 1:
         tile.scale.y *= -1
     
@@ -106,6 +106,7 @@ func getRandomTile():
         tile.scale.x *= -1
     
     tile.rotate((randi() % 4)* 1.5707963268)
+    $".".add_child(tile)
     return tile
     
 func drawArrows():
@@ -141,32 +142,38 @@ func drawField():
     for row in field:
         for node in row:
 
-            node.position = Vector2((j+0.5)*(tile_basesize*tile_scaling)+tile_basesize,(i+0.5)*(tile_basesize*tile_scaling)+tile_basesize)
+            var TweenNode: Tween = node.get_node("Tween")
+            var newPos = Vector2((j+0.5)*(tile_basesize*tile_scaling)+tile_basesize, (i+0.5)*(tile_basesize*tile_scaling)+tile_basesize)
             
-            if node.get_parent() == null:
-                $".".add_child(node)
+            
+#            if node.get_parent() == null:
+#                var spawnPos = Vector2((j-1.0)*(tile_basesize*tile_scaling)+tile_basesize, (i-1.0)*(tile_basesize*tile_scaling)+tile_basesize)
+#                node.position = spawnPos
+#                $".".add_child(node)
+            #else:
+            TweenNode.interpolate_property(node,"position", node.position, newPos, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT) 
+            TweenNode.start()
                 
             j+=1
         i+=1
         j=0
     
+var dwarf = null
 func spawnDwarf():
-    var dwarf = load("res://Dwarf.tscn").instance()
+    dwarf = load("res://Dwarf.tscn").instance()
     dwarf.position = Vector2(32+(tile_basesize*tile_scaling), 32+(tile_basesize*tile_scaling))
-    print(getCord(dwarf.position.x, dwarf.position.y))
     $".".add_child(dwarf)
 
 func getRow(y):
     return int(y-tile_basesize) / (tile_basesize * tile_scaling)
-    
+
 func getCol(x):
     return int(x-tile_basesize) / (tile_basesize * tile_scaling)
-    
+
 func getCord(x,y):
     return Vector2(getCol(x), getRow(y))
     
 func arrow_pressed(pos):
-    print(pos)
     var selected_tile = get_node("../ItemList").get_selected_tile()
     if selected_tile == null:
         return
@@ -178,6 +185,36 @@ func arrow_pressed(pos):
         insertCol(true, pos.x-1, selected_tile)
     if pos.y == fieldsize_height + 1: # bot row button pressed
         insertCol(false, pos.x-1, selected_tile)
+
+    
+var scrolling = false
+func scroll():
+    # remove first row
+    # add new last row
+
+    var row = []
+    for _i in range(fieldsize_width):
+        row.append(getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100)))
+        
+    var old = field.pop_front()
+    for tile in old:
+        $".".remove_child(tile)
+        
+    generateTileItem(row)
+    field.push_back(row)
+    
+    dwarf.position.y -= tile_basesize*tile_scaling
+    
+    drawField()
+    $"../Score".increaseScore()
+
+var itemProb = 0.75
+func generateTileItem(row):
+    if randf() < itemProb:
+        var tile = row[randi() % row.size()]
+        
+        tile.add_child(load("res://TileItem.tscn").instance())
+
     
     
 

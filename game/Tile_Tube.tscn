@@ -17,3 +17,5 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D_Bottom" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 24 )
 shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

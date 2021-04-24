@@ -40,11 +40,11 @@ func get_input():
     if Input.is_action_just_pressed("jump") and is_on_floor():
         velocity.y -= jumpforce
         if velocity.x < 0:                                                      # backflip city
-            for x in range(30): #16
+            for _x in range(30): #16
                 _animated_sprite.rotation_degrees += 360/30  #22.5
                 yield(get_tree().create_timer(0.4/30),"timeout")
         elif velocity.x >= 0:
-            for x in range(30): #16
+            for _x in range(30): #16
                 _animated_sprite.rotation_degrees -= 360/30  #22.5
                 yield(get_tree().create_timer(0.4/30),"timeout")
 
@@ -57,7 +57,14 @@ func _physics_process(delta):
     
     # gravity
     velocity.y += gravity * delta
-
+    
+    checkScroll()
+    
+func checkScroll():
+    if get_parent().getRow(position.y) > 1:
+        get_parent().scroll()
+        velocity.y = 0
+  
 #    if previous_frame_floor != is_on_floor() and vel_y == 13:                   #will only trigger once
 #        print(is_on_floor())
 #        print(previous_frame_floor)
