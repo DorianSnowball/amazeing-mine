@@ -77,11 +77,11 @@ func drawField():
 			var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
 			tile.position = Vector2(j*64+32,i*64+32)
 			
-			#if randi() % 2 == 1:
-				#node.scale.y *= -1
+			if randi() % 2 == 1:
+				tile.scale.y *= -1
 			
-			#if randi() % 2 == 1:
-				#node.scale.x *= -1
+			if randi() % 2 == 1:
+				tile.scale.x *= -1
 			
 			tile.rotate((randi() % 4)* 1.5707963268)
 			
