@@ -107,8 +107,7 @@ animations = [ {
 "speed": 7.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 12.5232, 20.2456 )
+[sub_resource type="CapsuleShape2D" id=19]
 
 [node name="Dwarf" type="KinematicBody2D"]
 position = Vector2( 1.41422, -11.6673 )

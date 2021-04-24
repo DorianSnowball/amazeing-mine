@@ -18,7 +18,7 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
     if body.name == "Dwarf":
-        print("Picked up item")
+        $"/root/Control/ItemList".add_tile($"/root/Control/Gamefield".getRandomTile(Vector2(0,0)))
         call_deferred("delete", self)
 
 func delete(node):

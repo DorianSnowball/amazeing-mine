@@ -10,6 +10,7 @@ var tile_basesize = 64
 var padding_tiles = 50
 var padding_screen = 70
 var cols = 3
+var start_tiles = 50
 
 var button_count = 9
 
@@ -19,14 +20,12 @@ func add_button(indx):
     var arrow: Node2D = arrow_button.instance()
     var button: TextureButton = arrow.get_child(0)
     
-    button.texture_normal = null# tile.get_child(0).texture
+    button.texture_normal = null
     arrow.scale = Vector2(tile_scaling, tile_scaling)
-    #arrow.rotate(tile.rotation)
     
     #scale fuckery
     if len(get_children()) == 0:
         arrow.position = Vector2(dimensions.x - cols*((tile_basesize*tile_scaling)+padding_tiles)+padding_screen, padding_screen + tile_basesize)
-        #$".".add_child(arrow)
     else:
         var prev : Node2D =  get_child(get_child_count()-1)
         if prev.position.x + padding_tiles + (tile_basesize * tile_scaling) + padding_screen > dimensions.x:
@@ -62,7 +61,6 @@ func add_tile(tile):
 func inv_button(indx):
     var tile : KinematicBody2D = inv[indx]
     clicked = indx
-    print("pressed button " + str(indx) + " with " + tile.name)
     
 func gen_buttons():
     for i in range(button_count):
@@ -72,17 +70,15 @@ func get_selected_tile():
     if len(inv) == 0:
         return null
     var tile = inv[clicked]
+    tile.position = get_child(clicked).position
     inv.remove(clicked)
     inv_to_buttons()
     clicked = 0
-    #tile.get_child(0).texture = load("res://Sprites/arrow.png")
-    print("returned: "+str(tile))
-    print(str(tile.rotation_degrees) + " " + tile.name)
     return tile
     
 func gen_inv():
-    for i in range(50):
-        add_tile($"../Gamefield".getRandomTile())
+    for i in range(start_tiles):
+        add_tile($"../Gamefield".getRandomTile(Vector2(0,0)))
 
 func _ready():
     dimensions = get_viewport().get_viewport().size
@@ -90,8 +86,6 @@ func _ready():
         tile_scaling = 2
     gen_buttons()
     gen_inv()
-    for t in range(10):
-        print(str(inv[t]) + " - " + str(inv[t].rotation_degrees))
     
     
     
