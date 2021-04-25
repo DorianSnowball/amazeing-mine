@@ -4,12 +4,14 @@ func button_start():
     visible = false
 
 func button_highscore():
-    pass
-    
+    $"Highscore".visible = true
+        
 func button_settings():
     pass
+    
 func button_credits():
-    pass
+    $"Credits".visible = true
+    
 func button_quit():
     get_tree().quit()
     
