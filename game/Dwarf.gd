@@ -72,7 +72,8 @@ func _physics_process(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.   
 func _process(delta):
-    $"/root/Control/Score".text = str(getTileHB($"/root/Control/Gamefield".field[getCurrentTile().y][getCurrentTile().x]))
+    pass
+    #$"/root/Control/Score".text = str(getTileHB($"/root/Control/Gamefield".field[getCurrentTile().y][getCurrentTile().x]))
     
     
 export var max_stuck_count = 5
@@ -96,18 +97,7 @@ func check_stuck(): # not is_on_ceiling()
 func checkScroll():
     if get_parent().getRow(position.y) > 1 and is_on_floor() and not get_parent().scrolling:
         get_parent().scroll()
-        #velocity.y = 0
-  
-#    if previous_frame_floor != is_on_floor() and vel_y == 13:                   #will only trigger once
-#        print(is_on_floor())
-#        print(previous_frame_floor)
-#        print("JUST TOOK DAMAGE MATE")
-#        _animated_sprite.play("damage")
-#        yield (_animated_sprite, "animation_finished")
-#        _animated_sprite.play("idle")
-#        previous_frame_floor = true
-#
-#    previous_frame_floor = is_on_floor()
+
 
 func getCurrentTile():
     return $"/root/Control/Gamefield".getCord(position.x, position.y)
@@ -118,11 +108,8 @@ func getTileHB(tile):
 func checkTeleport():
     var gamefield = $"/root/Control/Gamefield"
     var modifier = 0.17
-    #print(position.x)
     var left_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 + modifier)
     var right_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 - modifier) + (gamefield.tile_basesize * gamefield.tile_scaling * gamefield.fieldsize_width)
-    #print(left_define)
-    #print(right_define)
     
     if position.x <= left_define:
         position.x = right_define - 0.3
