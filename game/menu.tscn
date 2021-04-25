@@ -101,10 +101,10 @@ __meta__ = {
 [node name="ButtonQuit" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 431.597
-margin_top = 796.647
-margin_right = 872.597
-margin_bottom = 994.647
+margin_left = 441.497
+margin_top = 798.061
+margin_right = 882.497
+margin_bottom = 996.061
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 text = "Quit"
