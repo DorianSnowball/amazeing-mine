@@ -18,6 +18,14 @@ config/name="ld48"
 run/main_scene="res://menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://Globals.gd"
+
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/width=1920

@@ -10,6 +10,8 @@ var arrow_button = load("res://Arrow_Button.tscn")
 
 var tile_list = [tile_tube, tile_corner, tile_T_piece, tile_intersection]
 
+var start_time = 0
+
 # Declare member variables here. Examples:
 export var fieldsize_width : int = 5
 export var fieldsize_height : int = 5
@@ -25,8 +27,10 @@ var field : = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # init 2d array
-    for x in range(fieldsize_height):                                           # x and y are swapped
-        field.append([])                                                        # x is column; y is row
+    start_time = OS.get_unix_time()
+    Globals.start_time = start_time
+    for x in range(fieldsize_height):
+        field.append([])
         field[x]=[]        
         for y in range(fieldsize_width):
             field[x].append([])
