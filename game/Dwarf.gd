@@ -16,6 +16,8 @@ var velocity : Vector2 = Vector2()
 
 #onready var sprite : Sprite = get_node("Sprite")
 onready var _animated_sprite = $AnimatedSprite
+onready var _magic_sprite = $"magic sprite"
+onready var _magic_sound = $poof
 
 func get_input():
     
@@ -59,6 +61,13 @@ func _physics_process(delta):
     velocity.y += gravity * delta
     
     checkScroll()
+    checkTeleport()
+    #print(str(position))
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.   
+func _process(delta):
+    #print("current Tile: " + str(getCurrentTile()))
+    $"/root/Control/Score".text = str(getTileHB($"/root/Control/Gamefield".field[getCurrentTile().y][getCurrentTile().x]))
     
 func checkScroll():
     if get_parent().getRow(position.y) > 1 and is_on_floor() and not get_parent().scrolling:
@@ -75,7 +84,42 @@ func checkScroll():
 #        previous_frame_floor = true
 #
 #    previous_frame_floor = is_on_floor()
+
+func getCurrentTile():
+    return $"/root/Control/Gamefield".getCord(position.x, position.y)
+    
+func getTileHB(tile):
+    return tile.hitbox
+    
+func checkTeleport():
+    var gamefield = $"/root/Control/Gamefield"
+    var modifier = 0.17
+    #print(position.x)
+    var left_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 + modifier)
+    var right_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 - modifier) + (gamefield.tile_basesize * gamefield.tile_scaling * gamefield.fieldsize_width)
+    #print(left_define)
+    #print(right_define)
+    
+    if position.x <= left_define:
+        position.x = right_define - 0.3
+        teleportEffect()
+        
+    elif position.x >= right_define:
+        position.x = left_define + 0.3
+        teleportEffect()
+
+
      
+func teleportEffect():
+    _magic_sound.play()
+    if not _magic_sprite.playing:
+        _magic_sprite.play("poof")
+
+        yield(get_tree().create_timer(.1),"timeout")
+        while _magic_sprite.frame != 0:
+            yield(get_tree().create_timer(.01),"timeout")
+        _magic_sprite.stop()
+        _magic_sound.stop()
     
     
                 

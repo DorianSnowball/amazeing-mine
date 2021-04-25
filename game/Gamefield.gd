@@ -25,8 +25,8 @@ var field : = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
     # init 2d array
-    for x in range(fieldsize_height):
-        field.append([])
+    for x in range(fieldsize_height):                                           # x and y are swapped
+        field.append([])                                                        # x is column; y is row
         field[x]=[]        
         for y in range(fieldsize_width):
             field[x].append([])
@@ -98,18 +98,40 @@ func getRandomTile(pos, spawn):
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
     tile.scale = Vector2(tile_scaling, tile_scaling)
     tile.position = pos
-
-    if randi() % 2 == 1:
-        tile.scale.y *= -1
-    
-    if randi() % 2 == 1:
-        tile.scale.x *= -1
-    
-    tile.rotate((randi() % 4)* 1.5707963268)
+    #print(str(tile))
+    #print(str(tile.hitbox))
+    randomTilePermutation(tile)
+    #print(str(tile.hitbox))
     if spawn:
         $".".add_child(tile)
     return tile
     
+func randomTilePermutation(tile):
+    if randi() % 2 == 1:                                                        # 50% chance an der x achse spiegeln
+        tile.scale.y *= -1
+        var temp = tile.hitbox["top"]                                           # transform the hitbox dict with the thing itself
+        tile.hitbox["top"] = tile.hitbox["bottom"]
+        tile.hitbox["bottom"] = temp
+    
+    if randi() % 2 == 1:                                                        # 50% chance an der y achse spiegeln
+        tile.scale.x *= -1
+        var temp = tile.hitbox["left"]
+        tile.hitbox["left"] = tile.hitbox["right"]
+        tile.hitbox["right"] = temp
+        
+    var rotation = randi() % 4                                                  # rotate the box by 90-360°
+    tile.rotate(rotation * 1.5707963268)
+    for i in range(rotation):                                                   # rotate the hitbox too
+        var top = tile.hitbox["top"]
+        var right = tile.hitbox["right"]
+        var bottom = tile.hitbox["bottom"]
+        var left = tile.hitbox["left"]
+        tile.hitbox["top"] = left
+        tile.hitbox["right"] = top
+        tile.hitbox["bottom"] = right
+        tile.hitbox["left"] = bottom
+    
+
 func drawArrows():
     # draw arrows
     for x in range(fieldsize_width + 2):
