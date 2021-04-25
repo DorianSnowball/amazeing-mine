@@ -130,7 +130,6 @@ func teleport():
         teleportEffect()
 
 
-     
 func teleportEffect():
     _magic_sound.play()
     if not _magic_sprite.playing:
