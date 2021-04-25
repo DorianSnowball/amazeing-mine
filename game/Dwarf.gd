@@ -19,6 +19,7 @@ var velocity : Vector2 = Vector2()
 #var previous_frame_floor : bool = true
 
 #onready var sprite : Sprite = get_node("Sprite")
+var rope_object = load("res://Rope.tscn")
 onready var _animated_sprite = $AnimatedSprite
 
 func get_input():
@@ -51,6 +52,8 @@ func get_input():
             for _x in range(30): #16
                 _animated_sprite.rotation_degrees -= 360/30  #22.5
                 yield(get_tree().create_timer(0.4/30),"timeout")
+    if Input.is_action_just_pressed("rope"):
+        spawn_rope()
 
 func _physics_process(delta):
     velocity.x = 0
@@ -82,6 +85,13 @@ func check_stuck(): # not is_on_ceiling()
     if stuck_count >= max_stuck_count:
         position = get_parent().get_tile_center(position)
         
+func spawn_rope():
+    var rope: RigidBody2D = rope_object.instance()
+    rope.apply_impulse(Vector2(),Vector2(0,-1000))
+    rope.position = position
+    rope.position.y -= 40
+    get_parent().add_child(rope)
+    
     
 func checkScroll():
     if get_parent().getRow(position.y) > 1 and is_on_floor() and not get_parent().scrolling:

@@ -43,7 +43,8 @@ func insertRow(left, rowIdx, tile):
     var row = field[rowIdx]
     if left:
         row.push_front(tile)
-        $".".remove_child(row.pop_back())
+        var node = row.pop_back()
+        $".".remove_child(node)
     else:
         row.push_back(tile)
         $".".remove_child(row.pop_front())
