@@ -19,8 +19,11 @@ var velocity : Vector2 = Vector2()
 #var previous_frame_floor : bool = true
 
 #onready var sprite : Sprite = get_node("Sprite")
+onready var gamefield = $"/root/Control/Gamefield"
 var rope_object = load("res://Rope.tscn")
 onready var _animated_sprite = $AnimatedSprite
+onready var _magic_sprite = $"magic sprite"
+onready var _magic_sound = $poof
 
 func get_input():
     
@@ -67,11 +70,20 @@ func _physics_process(delta):
     
     #$"/root/Control/Score".text = "on wall: " + str(is_on_wall()) + "\non floor: " + str(is_on_floor()) + "\non ceiling: " + str(is_on_ceiling())
     checkScroll()
+    teleport()
     check_stuck()
+    
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.   
+func _process(delta):
+    pass
+    #$"/root/Control/Score".text = str(getTileHB($"/root/Control/Gamefield".field[getCurrentTile().y][getCurrentTile().x]))
+    
     
 export var max_stuck_count = 5
 export var top_reset_trigger = 80
 export var delta_y : float = 5.0
+
 func check_stuck(): # not is_on_ceiling()
     var stuck_1 = is_on_wall() and not is_on_floor() and abs(last_y - position.y) <  delta_y
     var stuck_2 = position.y < top_reset_trigger and abs(last_y - position.y) <  delta_y
@@ -96,21 +108,43 @@ func spawn_rope():
 func checkScroll():
     if get_parent().getRow(position.y) > 1 and is_on_floor() and not get_parent().scrolling:
         get_parent().scroll()
-        #velocity.y = 0
-  
-#    if previous_frame_floor != is_on_floor() and vel_y == 13:                   #will only trigger once
-#        print(is_on_floor())
-#        print(previous_frame_floor)
-#        print("JUST TOOK DAMAGE MATE")
-#        _animated_sprite.play("damage")
-#        yield (_animated_sprite, "animation_finished")
-#        _animated_sprite.play("idle")
-#        previous_frame_floor = true
-#
-#    previous_frame_floor = is_on_floor()
-     
-    
-    
-                
-    
 
+
+func getCurrentTile():
+    return gamefield.getCord(position.x, position.y)
+    
+func getTileHB(tile):
+    return tile.hitbox
+    
+func teleport():
+    var modifier = 0.17
+    var left_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 + modifier)
+    var right_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 - modifier) + (gamefield.tile_basesize * gamefield.tile_scaling * gamefield.fieldsize_width)
+    
+    if position.x <= left_define and checkForRoom():
+        position.x = right_define - modifier*2
+        teleportEffect()
+        
+    elif position.x >= right_define and checkForRoom():
+        position.x = left_define + modifier*2
+        teleportEffect()
+
+
+     
+func teleportEffect():
+    _magic_sound.play()
+    if not _magic_sprite.playing:
+        _magic_sprite.play("poof")
+
+        yield(get_tree().create_timer(.1),"timeout")
+        while _magic_sprite.frame != 0:
+            yield(get_tree().create_timer(.01),"timeout")
+        _magic_sprite.stop()
+        _magic_sound.stop()
+
+func checkForRoom():
+    var curTile = getCurrentTile()
+    return (curTile.x == 0 and not getTileHB(gamefield.field[curTile.y][curTile.x])["left"] and not getTileHB(gamefield.field[curTile.y][gamefield.fieldsize_width-1])["right"]) or \
+    (curTile.x == gamefield.fieldsize_width-1 and not getTileHB(gamefield.field[curTile.y][curTile.x])["right"] and not getTileHB(gamefield.field[curTile.y][0])["left"])
+         
+        
