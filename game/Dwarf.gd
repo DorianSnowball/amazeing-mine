@@ -19,6 +19,7 @@ var velocity : Vector2 = Vector2()
 #var previous_frame_floor : bool = true
 
 #onready var sprite : Sprite = get_node("Sprite")
+onready var gamefield = $"/root/Control/Gamefield"
 onready var _animated_sprite = $AnimatedSprite
 onready var _magic_sprite = $"magic sprite"
 onready var _magic_sound = $poof
@@ -66,7 +67,7 @@ func _physics_process(delta):
     
     #$"/root/Control/Score".text = "on wall: " + str(is_on_wall()) + "\non floor: " + str(is_on_floor()) + "\non ceiling: " + str(is_on_ceiling())
     checkScroll()
-    checkTeleport()
+    teleport()
     check_stuck()
     
 
@@ -100,23 +101,22 @@ func checkScroll():
 
 
 func getCurrentTile():
-    return $"/root/Control/Gamefield".getCord(position.x, position.y)
+    return gamefield.getCord(position.x, position.y)
     
 func getTileHB(tile):
     return tile.hitbox
     
-func checkTeleport():
-    var gamefield = $"/root/Control/Gamefield"
+func teleport():
     var modifier = 0.17
     var left_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 + modifier)
     var right_define = (gamefield.tile_basesize * gamefield.tile_scaling)/2 * (1.0 - modifier) + (gamefield.tile_basesize * gamefield.tile_scaling * gamefield.fieldsize_width)
     
-    if position.x <= left_define:
-        position.x = right_define - 0.3
+    if position.x <= left_define and checkForRoom():
+        position.x = right_define - modifier*2
         teleportEffect()
         
-    elif position.x >= right_define:
-        position.x = left_define + 0.3
+    elif position.x >= right_define and checkForRoom():
+        position.x = left_define + modifier*2
         teleportEffect()
 
 
@@ -131,8 +131,10 @@ func teleportEffect():
             yield(get_tree().create_timer(.01),"timeout")
         _magic_sprite.stop()
         _magic_sound.stop()
-    
-    
-                
-    
 
+func checkForRoom():
+    var curTile = getCurrentTile()
+    return (curTile.x == 0 and not getTileHB(gamefield.field[curTile.y][curTile.x])["left"] and not getTileHB(gamefield.field[curTile.y][gamefield.fieldsize_width-1])["right"]) or \
+    (curTile.x == gamefield.fieldsize_width-1 and not getTileHB(gamefield.field[curTile.y][curTile.x])["right"] and not getTileHB(gamefield.field[curTile.y][0])["left"])
+         
+        
