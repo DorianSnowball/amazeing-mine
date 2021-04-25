@@ -4,12 +4,13 @@
 [ext_resource path="res://Score.gd" type="Script" id=2]
 [ext_resource path="res://InvList.tscn" type="PackedScene" id=3]
 [ext_resource path="res://InvCounter.gd" type="Script" id=4]
-[ext_resource path="res://menu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://default_theme.tres" type="Theme" id=6]
 
 [node name="Control" type="Control"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 rect_rotation = -0.0285899
+theme = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -21,24 +22,27 @@ __meta__ = {
 [node name="Score" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -2.0
-margin_top = 8.0
-margin_right = 120.0
-margin_bottom = 114.0
+margin_left = -150.0
+margin_right = 150.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 2
+bbcode_enabled = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="InvCounter" type="RichTextLabel" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -185.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -190.0
+margin_top = 200.0
+margin_right = 190.0
+margin_bottom = 400.0
+bbcode_enabled = true
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Menu" parent="." instance=ExtResource( 5 )]
