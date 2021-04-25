@@ -13,4 +13,5 @@ func _ready():
     
 func increaseScore():
     score += 10
+    Globals.score  = score
     bbcode_text = "[center]Depth:\n" + str(score)+"m"
