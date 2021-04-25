@@ -11,11 +11,11 @@ var arrow_button = load("res://Arrow_Button.tscn")
 var tile_list = [tile_tube, tile_corner, tile_T_piece, tile_intersection]
 
 # Declare member variables here. Examples:
-var fieldsize_width : int = 5
-var fieldsize_height : int = 5
+export var fieldsize_width : int = 5
+export var fieldsize_height : int = 5
 
-var tile_scaling = 2
-var tile_basesize = 64
+export var tile_scaling = 2
+export var tile_basesize = 64
 
 var field : = []
 
@@ -215,7 +215,7 @@ func scroll():
     scrolling = false
     
 
-var itemProb = 0.5
+export var itemProb = 0.5
 func generateTileItem(row):
     if randf() < itemProb:
         var tile = row[randi() % row.size()]
