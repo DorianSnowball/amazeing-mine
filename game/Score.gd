@@ -9,8 +9,8 @@ extends RichTextLabel
 var score = 0
 
 func _ready():
-    text = "Depth:\n" + str(score)+"m"
+    bbcode_text = "[center]Depth:\n" + str(score)+"m"
     
 func increaseScore():
     score += 10
-    text = "Depth:\n" + str(score)+"m"
+    bbcode_text = "[center]Depth:\n" + str(score)+"m"

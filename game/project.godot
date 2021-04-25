@@ -10,13 +10,12 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
 
 config/name="ld48"
-run/main_scene="res://MainUI.tscn"
+run/main_scene="res://menu.tscn"
 config/icon="res://icon.png"
 
 [display]

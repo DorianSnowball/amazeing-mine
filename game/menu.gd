@@ -1,7 +1,7 @@
 extends Panel
 
 func button_start():
-    visible = false
+    get_tree().change_scene("res://MainUI.tscn")
 
 func button_highscore():
     $"Highscore".visible = true
