@@ -22,10 +22,6 @@ config/icon="res://icon.png"
 
 Globals="*res://Globals.gd"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=1920
@@ -33,7 +29,7 @@ window/size/height=1080
 
 [global]
 
-fps=true
+fps=false
 
 [input]
 
