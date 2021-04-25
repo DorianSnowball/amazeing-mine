@@ -10,7 +10,7 @@ var tile_basesize = 64
 var padding_tiles = 50
 var padding_screen = 70
 var cols = 3
-var start_tiles = 50
+var start_tiles = 10
 
 var button_count = 9
 
@@ -21,6 +21,7 @@ func add_button(indx):
     var button: TextureButton = arrow.get_child(0)
     
     button.texture_normal = null
+    button.texture_pressed = null
     arrow.scale = Vector2(tile_scaling, tile_scaling)
     
     #scale fuckery
@@ -34,6 +35,8 @@ func add_button(indx):
             arrow.position = Vector2(prev.position.x + padding_tiles + (tile_basesize * tile_scaling),prev.position.y)
     $".".add_child(arrow)
     
+    #bg
+        
     #button fuckery
     button.connect("pressed",self,"inv_button",[indx])
 
@@ -54,13 +57,17 @@ func inv_to_buttons():
     
 func add_tile(tile):
     inv.append(tile)
+    $"../InvCounter".modify_items(true)
     if len(inv) <= button_count:
         inv_to_buttons()
-    
+
     
 func inv_button(indx):
     var tile : KinematicBody2D = inv[indx]
+    inv_to_buttons()
+    get_child(indx).scale *= 1.5
     clicked = indx
+    
     
 func gen_buttons():
     for i in range(button_count):
@@ -74,11 +81,14 @@ func get_selected_tile():
     inv.remove(clicked)
     inv_to_buttons()
     clicked = 0
+    get_child(0).scale *= 1.5
+    $"../InvCounter".modify_items(false)
     return tile
     
 func gen_inv():
     for i in range(start_tiles):
         add_tile($"../Gamefield".getRandomTile(Vector2(0,0), false))
+    get_child(0).scale *= 1.5        
 
 func _ready():
     dimensions = get_viewport().get_viewport().size
@@ -86,17 +96,3 @@ func _ready():
         tile_scaling = 2
     gen_buttons()
     gen_inv()
-    
-    
-    
-    #var arrow: Node2D = arrow_button.instance()
-    #var button: TextureButton = arrow.get_child(0)
-    
-    #button.texture_normal = load("res://Sprites/Tile_Corner_Piece.png")
-    
-    #dimensions = get_viewport().get_viewport().size
-    
-    #arrow.scale = Vector2(tile_scaling, tile_scaling)
-    #arrow.rotate(1.5)
-    #arrow.position = Vector2(dimensions.y - (tile_basesize*tile_scaling)+tile_basesize,(tile_basesize*tile_scaling)+tile_basesize)
-    #$".".add_child(arrow)
