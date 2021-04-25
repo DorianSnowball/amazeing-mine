@@ -174,6 +174,11 @@ func getCol(x):
 func getCord(x,y):
     return Vector2(getCol(x), getRow(y))
     
+func get_tile_center(pos):
+    var tilepos = getCord(pos.x,pos.y)
+    return Vector2((tilepos.x+0.5)*(tile_basesize*tile_scaling)+tile_basesize, (tilepos.y+0.5)*(tile_basesize*tile_scaling)+tile_basesize)
+    
+    
 func arrow_pressed(pos):
     var selected_tile = get_node("../ItemList").get_selected_tile()
     if selected_tile == null:
