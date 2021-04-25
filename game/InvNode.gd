@@ -10,7 +10,7 @@ var tile_basesize = 64
 var padding_tiles = 50
 var padding_screen = 70
 var cols = 3
-var start_tiles = 50
+var start_tiles = 10
 
 var button_count = 9
 
