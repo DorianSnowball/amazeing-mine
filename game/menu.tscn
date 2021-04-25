@@ -128,6 +128,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HTTPRequest" type="HTTPRequest" parent="Highscore"]
+
 [node name="Credits" type="Panel" parent="."]
 visible = false
 anchor_right = 1.0

@@ -8,6 +8,10 @@ var speed : int = 200
 var jumpforce : int = 400
 var gravity : int = 800
 
+#no stuck
+var stuck_count = 0
+var last_y = 0
+
 var velocity : Vector2 = Vector2()
 
 #var vel_y : int = 0
@@ -58,7 +62,26 @@ func _physics_process(delta):
     # gravity
     velocity.y += gravity * delta
     
+    #$"/root/Control/Score".text = "on wall: " + str(is_on_wall()) + "\non floor: " + str(is_on_floor()) + "\non ceiling: " + str(is_on_ceiling())
     checkScroll()
+    check_stuck()
+    
+export var max_stuck_count = 5
+export var top_reset_trigger = 80
+export var delta_y : float = 5.0
+func check_stuck(): # not is_on_ceiling()
+    var stuck_1 = is_on_wall() and not is_on_floor() and abs(last_y - position.y) <  delta_y
+    var stuck_2 = position.y < top_reset_trigger and abs(last_y - position.y) <  delta_y
+    if stuck_1 or stuck_2:
+        stuck_count += 1
+    else:
+        stuck_count = 0
+    #$"/root/Control/InvCounter".text = "stuck count: " + str(stuck_count) + "\nlast y: " + str(last_y) + "\nmy y:" + str(position.y) + "\nmy tile " + str(get_parent().getCord(position.x,position.y))
+    last_y = position.y
+    
+    if stuck_count >= max_stuck_count:
+        position = get_parent().get_tile_center(position)
+        
     
 func checkScroll():
     if get_parent().getRow(position.y) > 1 and is_on_floor() and not get_parent().scrolling:
