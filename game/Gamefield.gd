@@ -232,10 +232,13 @@ func spawnAnimation():
     
 
 func getRow(y):
-    return int(y-tile_basesize) / (tile_basesize * tile_scaling)
+    var row = int(y-tile_basesize) / (tile_basesize * tile_scaling)
+    return clamp(row, 0, fieldsize_height)
 
 func getCol(x):
-    return int(x-tile_basesize) / (tile_basesize * tile_scaling)
+    var col = int(x-tile_basesize) / (tile_basesize * tile_scaling)
+    
+    return clamp(col, 0, fieldsize_width)
 
 func getCord(x,y):
     return Vector2(getCol(x), getRow(y))
@@ -291,11 +294,18 @@ func generateTileItem(row):
     if randf() < itemProb:
         var tile = row[randi() % row.size()]
         var chest = load("res://TileItem.tscn").instance()
-        chest.rotation = -tile.rotation
+        match tile.rotation_degrees:
+            90.0: chest.rotation_degrees = -90
+            180.0: chest.rotation_degrees = 180
+            270.0: chest.rotation_degrees = -270
+            _: print(tile.rotation_degrees)
+            
+        chest.scale.x = 1
         if tile.scale.x < 0:
-            chest.scale.x *= -1
-        elif tile.scale.y < 0:
+            chest.rotation_degrees *= -1
+        if tile.scale.y < 0:
             chest.scale.y *= -1
+            chest.rotation_degrees *= -1
         tile.add_child(chest)
 
     

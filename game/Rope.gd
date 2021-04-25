@@ -50,21 +50,24 @@ func _on_RigidBody2D_body_entered(body):
             get_parent().remove_child(self)
             body.add_child(self)
             global_position = pos
+            global_rotation_degrees = 0
            
             var joint = PinJoint2D.new()
             joint.node_a = body.get_path()
             joint.node_b = get_path()
             joint.position = position
             
-            #joint.position.y -= 30
             body.add_child(joint)
             
             var jointR1: Joint2D = $"JointR-1"
             jointR1.node_b = segments[0].get_path()
+            
+            segments[0].linear_velocity = Vector2()
+            linear_velocity = Vector2()
             attached = true
             
             var space_state = get_world_2d().direct_space_state
-            var exclusion_list = [self,$"Anchor", body, $"/root/Control/Gamefield/Dwarf"]
+            var exclusion_list = [self,$"Anchor", $"/root/Control/Gamefield/Dwarf"]
             exclusion_list.append_array(segments)
 
             var result = space_state.intersect_ray(global_position, Vector2(global_position.x,800), exclusion_list)
@@ -75,14 +78,21 @@ func _on_RigidBody2D_body_entered(body):
                 for i in range((distance/segment_size)-1):
                     var segment_joint = PinJoint2D.new()
                     var rope = rope_segment.instance()
+                    var last = segments.back()
                     
-                    segment_joint.position.y += segments.size() * segment_size
-                    rope.position.y += segments.size() * segment_size
-
                     add_child(segment_joint)
                     add_child(rope)
+                    segment_joint.global_position = last.global_position
+                    segment_joint.global_position.y += 32
                     
-                    segment_joint.node_a = segments.back().get_path()
+                    rope.global_position = last.global_position
+                    rope.global_position.y += 32
+                    
+                    segment_joint.global_rotation_degrees = 0
+                    rope.global_rotation_degrees = 0
+                    segment_joint.node_a = last.get_path()
                     segment_joint.node_b = rope.get_path()
                     
-                    segments.append(rope)                   
+                    segments.append(rope) 
+                    yield(get_tree().create_timer(0.25), "timeout")
+                    
