@@ -92,6 +92,7 @@ func generateRandomField():
 
             field[i][j] = getRandomTile(Vector2(0,fieldsize_height*tile_scaling*tile_basesize+100), true)
             j+=1
+        generateTileItem(row)
         i+=1
         j=0
     

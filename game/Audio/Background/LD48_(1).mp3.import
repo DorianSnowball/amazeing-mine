@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LD48_(1).mp3-fcf0af2ff1ed3291fa937675121eb143.mp3str"
+
+[deps]
+
+source_file="res://Audio/Background/LD48_(1).mp3"
+dest_files=[ "res://.import/LD48_(1).mp3-fcf0af2ff1ed3291fa937675121eb143.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
