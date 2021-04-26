@@ -7,7 +7,7 @@ func button_highscore():
     $"Highscore".visible = true
         
 func button_settings():
-    pass
+    $"Settings".visible = true
     
 func button_controls():
     $"Controls".visible = true
@@ -60,3 +60,15 @@ func _ready():
     $"ButtonQuit".connect("pressed",self,"button_quit")
     
     spawnAnimation()
+
+func _on_sfx_value_changed(value):
+    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), lin_to_db(value))
+    $"Settings/sfx_value_label".bbcode_text = str(value)
+
+
+func _on_music_value_changed(value):
+    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), lin_to_db(value))
+    $"Settings/music_value_label".bbcode_text = str(value)
+    
+func lin_to_db(value):
+    return value

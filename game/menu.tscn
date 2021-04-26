@@ -9,18 +9,18 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 250
 font_data = ExtResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 249, 80.0001 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 120
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 70
 font_data = ExtResource( 1 )
 
@@ -120,7 +120,7 @@ margin_left = 906.0
 margin_top = 72.0
 margin_right = 1832.0
 margin_bottom = 504.0
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]aMAZEing
 Mine"
@@ -137,7 +137,7 @@ position = Vector2( 797.899, -271.944 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 930.56, 721.056 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Highscore" type="Panel" parent="."]
 visible = false
@@ -267,7 +267,7 @@ margin_left = 1466.0
 margin_top = 72.0
 margin_right = 1832.0
 margin_bottom = 175.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -289,7 +289,7 @@ margin_left = 161.56
 margin_top = 208.056
 margin_right = 1558.24
 margin_bottom = 663.096
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[table=3]
 	[cell][u]Main [/u]     [/cell]
@@ -330,7 +330,7 @@ margin_left = 1473.56
 margin_top = 72.0563
 margin_right = 1839.56
 margin_bottom = 183.056
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Controls"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -345,3 +345,153 @@ text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Settings" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Label" parent="Settings"]
+margin_left = 1473.56
+margin_top = 72.0563
+margin_right = 1839.56
+margin_bottom = 183.056
+custom_fonts/font = SubResource( 4 )
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Settings"]
+margin_left = 1604.81
+margin_top = 929.527
+margin_right = 1858.81
+margin_bottom = 1046.53
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Volume_label" type="RichTextLabel" parent="Settings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -248.0
+margin_top = 250.0
+margin_right = 239.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center][b]Volume"
+text = "Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfx_label" type="RichTextLabel" parent="Settings"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -243.5
+margin_top = -82.5
+margin_right = 243.5
+margin_bottom = 18.5
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Soundeffects"
+text = "Soundeffects"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfx_value_label" type="RichTextLabel" parent="Settings"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 528.0
+margin_top = -20.0
+margin_right = 592.0
+margin_bottom = 25.0
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]100"
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfx" type="HSlider" parent="Settings"]
+margin_left = 464.0
+margin_top = 512.0
+margin_right = 964.0
+margin_bottom = 544.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 5 )
+min_value = -80.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+ticks_on_borders = true
+
+[node name="music_label" type="RichTextLabel" parent="Settings"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -243.5
+margin_top = 109.5
+margin_right = 243.5
+margin_bottom = 210.5
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Music"
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music_value_label" type="RichTextLabel" parent="Settings"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 528.0
+margin_top = 172.0
+margin_right = 592.0
+margin_bottom = 217.0
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]100"
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music" type="HSlider" parent="Settings"]
+margin_left = 464.0
+margin_top = 704.0
+margin_right = 964.0
+margin_bottom = 736.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 5 )
+min_value = -80.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="value_changed" from="Settings/sfx" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="Settings/music" to="." method="_on_music_value_changed"]
