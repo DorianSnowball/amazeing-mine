@@ -139,31 +139,63 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label4" type="Label" parent="Credits"]
+[node name="Devs" type="Label" parent="Credits"]
 margin_left = 115.0
-margin_top = 82.0
-margin_right = 822.0
-margin_bottom = 361.0
+margin_top = 85.0
+margin_right = 409.0
+margin_bottom = 330.0
 text = "Developed by
 ============
-
-Cradac                | @cradmax
+Cradac
 Cybermuell
-DorianSnowball       | @DorianSnowball"
+DorianSnowball"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label7" type="Label" parent="Credits"]
-margin_left = 737.384
-margin_top = 612.639
-margin_right = 1731.38
-margin_bottom = 891.639
+[node name="Handles" type="Label" parent="Credits"]
+margin_left = 442.527
+margin_top = 85.0
+margin_right = 891.527
+margin_bottom = 330.0
+text = "
+
+| @cradmax
+| cybermuell@layer8.space
+| @DorianSnowball"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Label" parent="Credits"]
+anchor_right = 0.021
+anchor_bottom = 0.041
+margin_left = 117.0
+margin_top = 350.0
+margin_right = 821.68
+margin_bottom = 450.0
+text = "Music & Sound
+=============
+Lars Austermeier"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Art" type="Label" parent="Credits"]
+margin_left = 115.0
+margin_top = 515.0
+margin_right = 1109.0
+margin_bottom = 1004.0
 text = "Art
 ===
 \"Pixel Art Dwarf Sprites\" by PixElthen licensed CC-BY 4.0
 some modifications were done
 https://opengameart.org/content/pixel-art-dwarf-sprites
+
+\"Poof Effect Spritesheet\" by jellyfizh licensed CC0
+
+\"PixelLetters Font\" by GeelynEdits licensed as Freeware
+
 "
 __meta__ = {
 "_edit_use_anchors_": false
