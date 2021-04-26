@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LD48_Metal_ping.mp3-a4c56b3b01445ce28d1c9a3a7d108a1d.mp3str"
+
+[deps]
+
+source_file="res://Audio/LD48_Metal_ping.mp3"
+dest_files=[ "res://.import/LD48_Metal_ping.mp3-a4c56b3b01445ce28d1c9a3a7d108a1d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
