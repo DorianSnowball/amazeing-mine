@@ -8,6 +8,8 @@ var end_time = 0
 
 export var highscore_post_url = "https://doriansnowball.de/posthighscore.php"
 func name_entered(name):
+    if $"namebox".editable == false:
+        return
     var time = end_time - Globals.start_time
     var query = JSON.print([["name",name],["score",Globals.score],["time",time]])
     var headers = ["Content-Type: application/json"]
