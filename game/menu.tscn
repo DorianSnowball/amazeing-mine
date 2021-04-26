@@ -146,6 +146,7 @@ position = Vector2( 930.56, 721.056 )
 shape = SubResource( 3 )
 
 [node name="Highscore" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1.33484
