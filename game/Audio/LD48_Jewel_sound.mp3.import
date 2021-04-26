@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LD48_Jewel_sound.mp3-b20c5d466c9589c04e0c5ada3003c533.mp3str"
+
+[deps]
+
+source_file="res://Audio/LD48_Jewel_sound.mp3"
+dest_files=[ "res://.import/LD48_Jewel_sound.mp3-b20c5d466c9589c04e0c5ada3003c533.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

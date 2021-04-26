@@ -267,10 +267,6 @@ var scrolling = false
 var tile_color = Color.white
 var item_color = Color.darkgreen
 
-var tile_level = 0
-var item_level = 0
-export var score_per_level = 500
-
 func scroll():
     randomize()
     # remove first row
@@ -287,19 +283,17 @@ func scroll():
     #print("score",float(Globals.score))
     #print("needed",((level+1) * score_per_level))
     #print("calc",float(Globals.score) / ((level+1) * score_per_level))
-    if (float(Globals.score) / ((tile_level+1) * score_per_level)) > 1.0:
-        tile_level += 1
+    if (float(Globals.score) / ((level+1) * score_per_level)) > 1.0:
+        level += 1
         tile_color = Color(randf(), randf(), randf())
-        print("updated color ", tile_color)
-        
-    if (float(Globals.score) / ((item_level+1) * score_per_level)) > 0.75:
-        item_level += 1
         item_color = Color(randf(), randf(), randf())
+        score_per_level = stepify(500 + 50 / getDifficulty(), 10)
+        get_parent().get_node("Level").bbcode_text = "[center]Level:\n"+str(level)
+        
     
     for tile in row:
         var canvas_item: CanvasItem = tile.get_node("Sprite")
         canvas_item.modulate = tile_color
-        #print("tile ", tile, " uses ", canvas_item.modulate)
     
     clean_up_ropes()
     generateTileItem(row)
@@ -318,8 +312,15 @@ func scroll():
 export var itemProb = 0.1337
 export var chestProb = 0.5
 export var difficulty_increase = 0.05
+
+var level = 0
+var score_per_level: int = 500
+func getDifficulty():
+    return chestProb * pow(difficulty_increase,(level/55.0))
+
 func generateTileItem(row):
-    if randf() < (chestProb - (tile_level * difficulty_increase)):
+    print(level, score_per_level, getDifficulty())
+    if randf() < getDifficulty():
         var tile = row[randi() % row.size()]
         var chest = load("res://TileItem.tscn").instance()
         match tile.rotation_degrees:
@@ -342,7 +343,7 @@ func generateTileItem(row):
         var item = load("res://TileItem.tscn").instance()
 
         item.get_node("Sprite").play("gem")
-        item.score = 50
+        item.score = stepify(score_per_level / 5, 10)
         var canvas_item: CanvasItem = item.get_node("Sprite")
         canvas_item.modulate = item_color
         match tile.rotation_degrees:

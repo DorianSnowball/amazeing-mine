@@ -93,6 +93,9 @@ func _on_RigidBody2D_body_entered(body):
                     segment_joint.node_a = last.get_path()
                     segment_joint.node_b = rope.get_path()
                     
-                    segments.append(rope) 
-                    yield(get_tree().create_timer(0.25), "timeout")
-                    
+                    segments.append(rope)
+                    if get_tree(): 
+                        yield(get_tree().create_timer(0.25), "timeout")
+                    else:
+                        print("Canceling rope spawn because despawn")
+                        return

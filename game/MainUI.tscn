@@ -25,16 +25,40 @@ __meta__ = {
 [node name="ItemList" parent="." instance=ExtResource( 3 )]
 start_tiles = 50
 
-[node name="Score" type="RichTextLabel" parent="."]
+[node name="Level" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -150.0
-margin_right = 150.0
-margin_bottom = 100.0
+margin_left = -210.0
+margin_top = 200.0
+margin_right = -10.0
+margin_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
 bbcode_enabled = true
+bbcode_text = "[center]Level:
+0"
+text = "Level:
+0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -10.0
+margin_top = 200.0
+margin_right = 190.0
+margin_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+bbcode_text = "[center]Score:
+0"
+text = "Score:
+0"
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -43,25 +67,32 @@ __meta__ = {
 [node name="InvCounter" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -190.0
-margin_top = 200.0
+margin_left = -210.0
+margin_top = 335.0
 margin_right = 190.0
-margin_bottom = 400.0
+margin_bottom = 435.0
 bbcode_enabled = true
+bbcode_text = "[center]Items in Inventory:
+50"
+text = "Items in Inventory:
+50"
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Timer" type="RichTextLabel" parent="."]
-anchor_top = 0.191
-anchor_right = 0.549
-anchor_bottom = 0.343
-margin_left = 792.0
-margin_top = 180.72
-margin_right = 138.92
-margin_bottom = 135.56
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -210.0
+margin_top = 65.0
+margin_right = 190.0
+margin_bottom = 165.0
 bbcode_enabled = true
+bbcode_text = "[center]Elapsed Time:
+13:37"
+text = "Elapsed Time:
+13:37"
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
