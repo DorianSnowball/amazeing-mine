@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Pixellettersfull-BnJ5.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://default_theme.tres" type="Theme" id=5]
 [ext_resource path="res://Dwarf.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/logo_white.png" type="Texture" id=7]
+[ext_resource path="res://Volume.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -373,6 +374,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Back" type="Button" parent="Settings"]
+margin_left = 1604.81
+margin_top = 929.527
+margin_right = 1858.81
+margin_bottom = 1046.53
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Header" type="Label" parent="Settings"]
 margin_left = 1473.56
 margin_top = 72.0563
@@ -384,130 +395,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Button" parent="Settings"]
-margin_left = 1604.81
-margin_top = 929.527
-margin_right = 1858.81
-margin_bottom = 1046.53
-text = "Back"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Volume_label" type="RichTextLabel" parent="Settings"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -248.0
-margin_top = 250.0
-margin_right = 239.0
-margin_bottom = 360.0
-rect_pivot_offset = Vector2( -532.5, 430 )
-theme = ExtResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[center][b]Volume"
-text = "Volume"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="sfx_label" type="RichTextLabel" parent="Settings"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -243.5
-margin_top = -82.5
-margin_right = 243.5
-margin_bottom = 18.5
-rect_pivot_offset = Vector2( -532.5, 430 )
-theme = ExtResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[center]Soundeffects"
-text = "Soundeffects"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="sfx_value_label" type="RichTextLabel" parent="Settings"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 528.0
-margin_top = -20.0
-margin_right = 592.0
-margin_bottom = 25.0
-rect_pivot_offset = Vector2( -532.5, 430 )
-theme = ExtResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[center]100"
-text = "100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="sfx" type="HSlider" parent="Settings"]
-margin_left = 464.0
-margin_top = 512.0
-margin_right = 964.0
-margin_bottom = 544.0
-rect_scale = Vector2( 2, 2 )
-theme = ExtResource( 5 )
-value = 100.0
-rounded = true
-tick_count = 11
-ticks_on_borders = true
-
-[node name="music_label" type="RichTextLabel" parent="Settings"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -243.5
-margin_top = 109.5
-margin_right = 243.5
-margin_bottom = 210.5
-rect_pivot_offset = Vector2( -532.5, 430 )
-theme = ExtResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[center]Music"
-text = "Music"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="music_value_label" type="RichTextLabel" parent="Settings"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 528.0
-margin_top = 172.0
-margin_right = 592.0
-margin_bottom = 217.0
-rect_pivot_offset = Vector2( -532.5, 430 )
-theme = ExtResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[center]100"
-text = "100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="music" type="HSlider" parent="Settings"]
-margin_left = 465.782
-margin_top = 704.0
-margin_right = 965.782
-margin_bottom = 736.0
-rect_scale = Vector2( 2, 2 )
-theme = ExtResource( 5 )
-value = 100.0
-rounded = true
-tick_count = 11
-ticks_on_borders = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="value_changed" from="Settings/sfx" to="." method="_on_sfx_value_changed"]
-[connection signal="value_changed" from="Settings/music" to="." method="_on_music_value_changed"]
+[node name="Volume" parent="Settings" instance=ExtResource( 8 )]
