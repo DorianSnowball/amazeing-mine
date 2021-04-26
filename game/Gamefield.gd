@@ -266,6 +266,15 @@ func arrow_pressed(pos):
     if pos.y == fieldsize_height + 1: # bot row button pressed
         insertCol(false, pos.x-1, selected_tile)
 
+func ropes_on_screen():
+    var ropes = 0
+    for c in get_children():
+        if c.name == 'Rope':
+            ropes += 1
+        for d in c.get_children():
+            if d.name == 'Rope':
+                ropes += 1
+    return ropes
     
 var scrolling = false
 var tile_color = Color.white

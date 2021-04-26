@@ -1,6 +1,6 @@
-# aMAZEing Mine
+# ![Logo](images/logo.png) aMAZEing Mine
 
-![GitHub release](https://img.shields.io/github/v/release/DorianSnowball/l48?label=Release&style=flat-square)![MIT License](https://img.shields.io/github/license/DorianSnowball/l48?style=flat-square&label=License)
+![GitHub release](https://img.shields.io/github/v/release/DorianSnowball/l48?label=Release&style=flat-square) ![MIT License](https://img.shields.io/github/license/DorianSnowball/l48?style=flat-square&label=License)
 
 ## Info
 
@@ -9,6 +9,10 @@
 The idea for this game comes from the classic board game [Labyrinth](https://en.wikipedia.org/wiki/Labyrinth_(board_game)), which allows you to alter the game field by pushing maze tiles from the sides, affecting all tiles in that row. We adapted this idea into a 2D side-scrolling game with the goal of breaking the highscore by delving as deep into the caves as possible.
 
 The game was developed in the [Godot Game Engine](https://godotengine.org).
+
+![Climbing](images/main_menu.gif)
+
+---
 
 ## License
 
@@ -21,4 +25,8 @@ Thanks go out to Lars for his work on the sounds and music of **aMAZEing Mine**.
 ## Links
 
 ![Twitter](https://img.shields.io/twitter/follow/cradmax?style=for-the-badge) ![Mastodon](https://img.shields.io/mastodon/follow/23471?domain=https%3A%2F%2Flayer8.space&label=Follow%20Cybermuell&style=for-the-badge) ![Twitter](https://img.shields.io/twitter/follow/DorianSnowBall?style=for-the-badge)
+
+---
+
+![Climbing](images/climbing_dwarf.gif) 
 

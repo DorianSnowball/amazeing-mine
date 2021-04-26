@@ -16,7 +16,7 @@ _global_script_class_icons={
 
 config/name="ld48"
 run/main_scene="res://menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://Sprites/logo.png"
 
 [autoload]
 
