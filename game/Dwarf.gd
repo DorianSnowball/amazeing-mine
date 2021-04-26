@@ -55,7 +55,6 @@ func get_input(delta):
         frame_counter += 1
         velocity.x = 2.45* pow((frame_counter-3), 4)
         
-    print(velocity.x)
 
         
     if Input.is_action_just_pressed("move_left"):
@@ -121,7 +120,7 @@ func _physics_process(delta):
     if not on_rope:
         velocity.y += gravity * delta
     
-    $"/root/Control/Score".text = "Velocity" + str(velocity)
+    #$"/root/Control/Score".text = "Velocity" + str(velocity)
     #$"/root/Control/Score".text = "Animation: " + _animated_sprite.animation
     checkScroll()
     teleport()
