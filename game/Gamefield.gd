@@ -243,16 +243,17 @@ func scroll():
     
     
     drawField()
-    $"../Score".increaseScore()
+    $"../Score".increaseScore(10)
     #dwarf.position.y -= tile_basesize*tile_scaling
     
     yield(get_tree().create_timer(0.5), "timeout")
     scrolling = false
     
 
-export var itemProb = 0.5
+export var itemProb = 0.1337
+export var chestProb = 0.5
 func generateTileItem(row):
-    if randf() < itemProb:
+    if randf() < chestProb:
         var tile = row[randi() % row.size()]
         var chest = load("res://TileItem.tscn").instance()
         match tile.rotation_degrees:
@@ -268,10 +269,23 @@ func generateTileItem(row):
             chest.scale.y *= -1
             chest.rotation_degrees *= -1
         tile.add_child(chest)
+        return
 
-    
-    
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+    if randf() < itemProb:
+        var tile: KinematicBody2D = row[randi() % row.size()]
+        var item = load("res://TileItem.tscn").instance()
+        item.get_node("Sprite").play("gem")
+        item.score = 200
+        match tile.rotation_degrees:
+            90.0: item.rotation_degrees = -90
+            180.0: item.rotation_degrees = 180
+            270.0: item.rotation_degrees = -270
+            _: print(tile.rotation_degrees)
+            
+        item.scale.x = 1
+        if tile.scale.x < 0:
+            item.rotation_degrees *= -1
+        if tile.scale.y < 0:
+            item.scale.y *= -1
+            item.rotation_degrees *= -1
+        tile.add_child(item)

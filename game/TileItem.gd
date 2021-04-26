@@ -15,10 +15,15 @@ func _ready():
 #func _process(delta):
 #    pass
 
+var score
+
 
 func _on_Area2D_body_entered(body):
     if body.name == "Dwarf":
-        $"/root/Control/ItemList".add_tile($"/root/Control/Gamefield".getRandomTile(Vector2(0,0),false))
+        if score:
+            $"/root/Control/Score".increaseScore(score)
+        else:
+            $"/root/Control/ItemList".add_tile($"/root/Control/Gamefield".getRandomTile(Vector2(0,0),false))
         call_deferred("delete", self)
 
 func delete(node):
