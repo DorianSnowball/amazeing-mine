@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LD48_seil_sound.mp3-acae2f09a72106e1c5e7fb7b42130d04.mp3str"
+
+[deps]
+
+source_file="res://Audio/LD48_seil_sound.mp3"
+dest_files=[ "res://.import/LD48_seil_sound.mp3-acae2f09a72106e1c5e7fb7b42130d04.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
