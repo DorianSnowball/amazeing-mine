@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Pixellettersfull-BnJ5.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu.gd" type="Script" id=2]
@@ -6,21 +6,22 @@
 [ext_resource path="res://Credits.gd" type="Script" id=4]
 [ext_resource path="res://default_theme.tres" type="Theme" id=5]
 [ext_resource path="res://Dwarf.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/logo_white.png" type="Texture" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 250
 font_data = ExtResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 249, 80.0001 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 120
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 70
 font_data = ExtResource( 1 )
 
@@ -117,10 +118,10 @@ __meta__ = {
 
 [node name="Title" type="RichTextLabel" parent="."]
 margin_left = 906.0
-margin_top = 72.0
+margin_top = 72.0563
 margin_right = 1832.0
-margin_bottom = 504.0
-custom_fonts/normal_font = SubResource( 4 )
+margin_bottom = 504.056
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]aMAZEing
 Mine"
@@ -130,6 +131,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1320, 368 )
+scale = Vector2( 2.625, 2.73437 )
+texture = ExtResource( 7 )
+
 [node name="Dwarf" parent="." instance=ExtResource( 6 )]
 position = Vector2( 797.899, -271.944 )
 
@@ -137,7 +143,7 @@ position = Vector2( 797.899, -271.944 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 930.56, 721.056 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Highscore" type="Panel" parent="."]
 visible = false
@@ -267,7 +273,7 @@ margin_left = 1466.0
 margin_top = 72.0
 margin_right = 1832.0
 margin_bottom = 175.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -289,7 +295,7 @@ margin_left = 161.56
 margin_top = 208.056
 margin_right = 1558.24
 margin_bottom = 663.096
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[table=3]
 	[cell][u]Main [/u]     [/cell]
@@ -330,7 +336,7 @@ margin_left = 1473.56
 margin_top = 72.0563
 margin_right = 1839.56
 margin_bottom = 183.056
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Controls"
 __meta__ = {
 "_edit_use_anchors_": false
