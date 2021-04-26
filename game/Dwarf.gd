@@ -32,7 +32,7 @@ onready var _animated_sprite = $AnimatedSprite
 onready var _magic_sprite = $"magic sprite"
 onready var _magic_sound = $poof
 onready var _speech_sprite = $"speech bubble"
-
+export var max_ropes = 1
 func get_input(delta):
     if -3 <= velocity.x and velocity.x <= 3:                              # Dead Zone Detection
         velocity.x = 0
@@ -83,7 +83,8 @@ func get_input(delta):
                 _animated_sprite.rotation_degrees -= 360/30  #22.5
                 yield(get_tree().create_timer(0.4/30),"timeout")
     if Input.is_action_just_pressed("rope"):
-        spawn_rope()
+        if gamefield.ropes_on_screen() < max_ropes:
+            spawn_rope()
     
     if Input.is_action_pressed("climb_up") and on_rope:
         velocity.y = climb_speed * -1
