@@ -22,8 +22,12 @@ func _on_Area2D_body_entered(body):
     if body.name == "Dwarf":
         if score:
             $"/root/Control/Score".increaseScore(score)
+            $AudioStreamPlayer2D.play()
+            yield(get_tree().create_timer(0.75),"timeout")
+            $AudioStreamPlayer2D.stop()
         else:
             $"/root/Control/ItemList".add_tile($"/root/Control/Gamefield".getRandomTile(Vector2(0,0),false))
+            
         call_deferred("delete", self)
 
 func delete(node):

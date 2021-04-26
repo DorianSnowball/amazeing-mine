@@ -21,6 +21,10 @@ func _ready():
     var joint: Joint2D = $"JointR-1"
     joint.node_b = rope.get_path()
     joint.position = Vector2(0,0)
+    
+    $rope_audio.play()
+    yield(get_tree().create_timer(0.48),"timeout")
+    $rope_audio.stop()
    
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,6 +69,10 @@ func _on_RigidBody2D_body_entered(body):
             segments[0].linear_velocity = Vector2()
             linear_velocity = Vector2()
             attached = true
+            
+            $impact_audio.play()
+            yield(get_tree().create_timer(0.45),"timeout")
+            $impact_audio.stop()
             
             var space_state = get_world_2d().direct_space_state
             var exclusion_list = [self,$"Anchor", $"/root/Control/Gamefield/Dwarf"]
