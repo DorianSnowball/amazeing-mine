@@ -159,10 +159,10 @@ __meta__ = {
 [node name="RichTextLabel" type="RichTextLabel" parent="Highscore"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -623.414
-margin_top = 46.7573
-margin_right = 623.586
-margin_bottom = 1018.76
+margin_left = -797.105
+margin_top = 208.056
+margin_right = 449.895
+margin_bottom = 988.056
 bbcode_enabled = true
 bbcode_text = "[center]1. Dr. Orian Schneeball
 2. Crack Dack
@@ -186,6 +186,17 @@ __meta__ = {
 }
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Highscore"]
+
+[node name="Header" type="Label" parent="Highscore"]
+margin_left = 1410.0
+margin_top = 72.0
+margin_right = 1847.0
+margin_bottom = 175.0
+custom_fonts/font = SubResource( 4 )
+text = "Highscores"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Credits" type="Panel" parent="."]
 visible = false
@@ -247,9 +258,10 @@ text = "Art
 ===
 \"Pixel Art Dwarf Sprites\" by PixElthen licensed CC-BY 4.0
 some modifications were done
-https://opengameart.org/content/pixel-art-dwarf-sprites
 
 \"Poof Effect Spritesheet\" by jellyfizh licensed CC0
+
+\"2D Speech Bubbles\" by Parriah licensed CC0
 
 \"PixelLetters Font\" by GeelynEdits licensed as Freeware
 
@@ -269,9 +281,9 @@ __meta__ = {
 }
 
 [node name="Header" type="Label" parent="Credits"]
-margin_left = 1466.0
+margin_left = 1408.67
 margin_top = 72.0
-margin_right = 1832.0
+margin_right = 1774.67
 margin_bottom = 175.0
 custom_fonts/font = SubResource( 4 )
 text = "Credits"
@@ -332,9 +344,9 @@ __meta__ = {
 }
 
 [node name="Header" type="Label" parent="Controls"]
-margin_left = 1473.56
+margin_left = 1408.56
 margin_top = 72.0563
-margin_right = 1839.56
+margin_right = 1774.56
 margin_bottom = 183.056
 custom_fonts/font = SubResource( 4 )
 text = "Controls"
