@@ -288,7 +288,7 @@ func scroll():
         tile_color = Color(randf(), randf(), randf())
         item_color = Color(randf(), randf(), randf())
         score_per_level = stepify(500 + 50 / getDifficulty(), 10)
-        get_parent().get_node("Level").bbcode_text = "[center]Level:\n"+level
+        get_parent().get_node("Level").bbcode_text = "[center]Level:\n"+str(level)
         
     
     for tile in row:

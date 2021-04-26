@@ -40,7 +40,6 @@ bbcode_text = "[center]Level:
 0"
 text = "Level:
 0"
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

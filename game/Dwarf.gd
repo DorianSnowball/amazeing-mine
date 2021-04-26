@@ -121,7 +121,7 @@ func _physics_process(delta):
     if not on_rope:
         velocity.y += gravity * delta
     
-    $"/root/Control/Score".text = "Velocity" + str(velocity)
+    #$"/root/Control/Score".text = "Velocity" + str(velocity)
     #$"/root/Control/Score".text = "Animation: " + _animated_sprite.animation
     checkScroll()
     teleport()
