@@ -48,7 +48,7 @@ func get_input():
             _animated_sprite.play("walk")                                           # sprite animation
     
         # jump input
-    if Input.is_action_just_pressed("jump") and is_on_floor():
+    if Input.is_action_just_pressed("jump") and (is_on_floor() or on_rope):
         velocity.y -= jumpforce
 
         if velocity.x < 0:                                                      # backflip city
@@ -62,17 +62,17 @@ func get_input():
     if Input.is_action_just_pressed("rope"):
         spawn_rope()
     
-    if Input.is_action_pressed("climb_up"):
+    if Input.is_action_pressed("climb_up") and on_rope:
         velocity.y = climb_speed * -1
-    elif Input.is_action_pressed("climb_down"):
+    elif Input.is_action_pressed("climb_down") and on_rope:
         velocity.y = climb_speed
         
     if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and not Input.is_action_pressed("climb_up") and not Input.is_action_pressed("climb_down") and is_on_floor():
         _animated_sprite.play("idle")
         
-    if Input.is_action_just_pressed("climb_up"):
+    if Input.is_action_just_pressed("climb_up") and on_rope:
         _animated_sprite.play("climb")                                           # sprite animation
-    elif Input.is_action_just_pressed("climb_down"):
+    elif Input.is_action_just_pressed("climb_down") and on_rope:
         _animated_sprite.play("climb")  
     
     if Input.is_action_just_released("climb_up") or Input.is_action_just_released("climb_down"):
