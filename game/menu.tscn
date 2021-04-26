@@ -453,8 +453,7 @@ margin_right = 964.0
 margin_bottom = 544.0
 rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 5 )
-min_value = -80.0
-max_value = 0.0
+value = 100.0
 rounded = true
 tick_count = 11
 ticks_on_borders = true
@@ -496,14 +495,13 @@ __meta__ = {
 }
 
 [node name="music" type="HSlider" parent="Settings"]
-margin_left = 464.0
+margin_left = 465.782
 margin_top = 704.0
-margin_right = 964.0
+margin_right = 965.782
 margin_bottom = 736.0
 rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 5 )
-min_value = -80.0
-max_value = 0.0
+value = 100.0
 rounded = true
 tick_count = 11
 ticks_on_borders = true
