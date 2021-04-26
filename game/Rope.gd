@@ -74,6 +74,12 @@ func _on_RigidBody2D_body_entered(body):
             yield(get_tree().create_timer(0.45),"timeout")
             $impact_audio.stop()
             
+            if get_tree(): 
+                 yield(get_tree().create_timer(0.25), "timeout")
+            else:
+                print("Canceling rope spawn because despawn")
+                return
+            
             var space_state = get_world_2d().direct_space_state
             var exclusion_list = [self,$"Anchor", $"/root/Control/Gamefield/Dwarf"]
             exclusion_list.append_array(segments)
