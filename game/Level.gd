@@ -1,18 +1,14 @@
-extends Node
+extends RichTextLabel
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
-var start_time = 0
-var end_time = 0
-var score = 0
-var level = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+    bbcode_text = "[center]Level:\n" + str(Globals.level)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
