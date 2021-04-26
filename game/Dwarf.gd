@@ -121,9 +121,10 @@ func _physics_process(delta):
     
     #$"/root/Control/Score".text = "Velocity" + str(velocity)
     #$"/root/Control/Score".text = "Animation: " + _animated_sprite.animation
-    checkScroll()
-    teleport()
-    check_stuck()
+    if not in_spawn_animation:
+        checkScroll()
+        teleport()
+        check_stuck()
     
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.   
