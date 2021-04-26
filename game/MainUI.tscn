@@ -24,6 +24,7 @@ __meta__ = {
 [node name="Gamefield" parent="." instance=ExtResource( 1 )]
 
 [node name="ItemList" parent="." instance=ExtResource( 3 )]
+start_tiles = 9
 
 [node name="Level" type="RichTextLabel" parent="."]
 anchor_left = 0.5

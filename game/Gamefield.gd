@@ -294,6 +294,7 @@ func scroll():
         score_per_level = stepify(500 + 50 / getDifficulty(), 10)
         get_parent().get_node("Level").bbcode_text = "[center]Level:\n"+str(level)
         get_parent().get_node("Music").next_level(level)
+        Globals.level = level
         
     clean_up_ropes()
     generateTileItem(row)

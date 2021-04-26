@@ -15,6 +15,7 @@ func _process(delta):
     var seconds = elapsed % 60
     var str_elapsed = "[center]Elapsed Time:\n %02d : %02d" % [minutes, seconds]
     bbcode_text = str_elapsed
+    Globals.end_time = elapsed
 
 func _ready():
     pass # Replace with function body.
