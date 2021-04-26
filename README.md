@@ -1,6 +1,6 @@
-# ![logo](game/sprites/logo.png) aMAZEing Mine
+# ![Logo](images/logo.png) aMAZEing Mine
 
-![GitHub release](https://img.shields.io/github/v/release/DorianSnowball/l48?label=Release&style=flat-square)![MIT License](https://img.shields.io/github/license/DorianSnowball/l48?style=flat-square&label=License)
+![GitHub release](https://img.shields.io/github/v/release/DorianSnowball/l48?label=Release&style=flat-square) ![MIT License](https://img.shields.io/github/license/DorianSnowball/l48?style=flat-square&label=License)
 
 ## Info
 
