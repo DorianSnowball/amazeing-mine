@@ -1,0 +1,159 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Dwarf.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/logo_white.png" type="Texture" id=2]
+[ext_resource path="res://Pixellettersfull-BnJ5.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://test.gd" type="Script" id=4]
+[ext_resource path="res://Tile_Tube.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Tile_T_Piece.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Tile_Intersection.tscn" type="PackedScene" id=7]
+[ext_resource path="res://TileItem.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Tile_Corner.tscn" type="PackedScene" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 250
+font_data = ExtResource( 3 )
+
+[node name="Panel" type="Panel"]
+margin_right = 1080.0
+margin_bottom = 512.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="."]
+margin_left = 560.0
+margin_top = 32.0
+margin_right = 1486.0
+margin_bottom = 464.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[right]aMAZEing
+Mine"
+text = "aMAZEing
+Mine"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 776, 192 )
+texture = ExtResource( 2 )
+
+[node name="Dwarf" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 368 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( -96, -320 )
+scale = Vector2( 2, 2 )
+
+[node name="Tile_Tube3" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 144, 384 )
+
+[node name="Tile_Tube4" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 208, 384 )
+
+[node name="Tile_Tube5" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 272, 384 )
+
+[node name="Tile_Tube9" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 528, 384 )
+
+[node name="Tile_T_Piece" parent="Node2D" instance=ExtResource( 6 )]
+position = Vector2( 336, 384 )
+rotation = -3.14159
+
+[node name="Tile_Corner" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 400, 384 )
+
+[node name="Tile_T_Piece2" parent="Node2D" instance=ExtResource( 6 )]
+position = Vector2( 400, 448 )
+rotation = -3.14159
+
+[node name="Tile_T_Piece4" parent="Node2D" instance=ExtResource( 6 )]
+position = Vector2( 208, 448 )
+
+[node name="Tile_Corner2" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 592, 384 )
+
+[node name="Tile_Corner3" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 16, 384 )
+
+[node name="Tile_Tube7" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 80, 448 )
+rotation = -3.14159
+
+[node name="Tile_Corner6" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 16, 448 )
+rotation = -3.14159
+
+[node name="Tile_Corner4" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 464, 384 )
+rotation = -1.5708
+
+[node name="Tile_T_Piece3" parent="Node2D" instance=ExtResource( 6 )]
+position = Vector2( 336, 448 )
+
+[node name="Tile_Intersection" parent="Node2D" instance=ExtResource( 7 )]
+position = Vector2( 464, 448 )
+
+[node name="Tile_Intersection2" parent="Node2D" instance=ExtResource( 7 )]
+position = Vector2( 144, 448 )
+
+[node name="TileItem" parent="Node2D" instance=ExtResource( 8 )]
+position = Vector2( 79.7898, 384 )
+
+[node name="Tile_Tube" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 528, 448 )
+
+[node name="Tile_Tube8" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 272, 512 )
+
+[node name="Tile_Tube10" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 208, 512 )
+rotation = 1.5708
+
+[node name="Tile_Corner7" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 592, 448 )
+rotation = 1.5708
+
+[node name="Tile_Corner5" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 336, 512 )
+
+[node name="Tile_Corner11" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 80, 384 )
+rotation = 4.71239
+
+[node name="Tile_Intersection3" parent="Node2D" instance=ExtResource( 7 )]
+position = Vector2( 400, 512 )
+
+[node name="Tile_Corner9" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 16, 512 )
+rotation = -1.5708
+
+[node name="Tile_Tube6" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 80, 512 )
+rotation = -3.14159
+
+[node name="Tile_T_Piece5" parent="Node2D" instance=ExtResource( 6 )]
+position = Vector2( 144, 512 )
+rotation = 1.5708
+
+[node name="Tile_Corner8" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 464, 512 )
+rotation = -3.14159
+
+[node name="Tile_Tube11" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 528, 512 )
+
+[node name="Tile_Corner10" parent="Node2D" instance=ExtResource( 9 )]
+position = Vector2( 592, 512 )
+
+[node name="Tile_T_Piece6" parent="Node2D" instance=ExtResource( 6 )]
+position = Vector2( 272, 448 )
+rotation = 1.5708
+
+[node name="TileItem2" parent="Node2D" instance=ExtResource( 8 )]
+position = Vector2( 528, 448 )
