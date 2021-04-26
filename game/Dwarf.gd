@@ -54,8 +54,6 @@ func get_input(delta):
     if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and velocity.x != 0:
         frame_counter += 1
         velocity.x = 2.45* pow((frame_counter-3), 4)
-        
-    print(velocity.x)
 
         
     if Input.is_action_just_pressed("move_left"):

@@ -111,6 +111,9 @@ func getRandomTile(pos, spawn):
     tile.scale = Vector2(tile_scaling, tile_scaling)
     tile.position = pos
     
+    var canvas_item: CanvasItem = tile.get_node("Sprite")
+    canvas_item.modulate = tile_color
+    
     tilePermutation(tile, randi() % 2, randi() % 2, randi() % 4)
     if spawn:
         $".".add_child(tile)
@@ -289,12 +292,8 @@ func scroll():
         item_color = Color(randf(), randf(), randf())
         score_per_level = stepify(500 + 50 / getDifficulty(), 10)
         get_parent().get_node("Level").bbcode_text = "[center]Level:\n"+str(level)
+        get_parent().get_node("Music").next_level(level)
         
-    
-    for tile in row:
-        var canvas_item: CanvasItem = tile.get_node("Sprite")
-        canvas_item.modulate = tile_color
-    
     clean_up_ropes()
     generateTileItem(row)
     field.push_back(row)
@@ -319,7 +318,7 @@ func getDifficulty():
     return chestProb * pow(difficulty_increase,(level/55.0))
 
 func generateTileItem(row):
-    print(level, score_per_level, getDifficulty())
+    #print(level, score_per_level, getDifficulty())
     if randf() < getDifficulty():
         var tile = row[randi() % row.size()]
         var chest = load("res://TileItem.tscn").instance()
