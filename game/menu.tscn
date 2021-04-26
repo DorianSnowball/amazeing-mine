@@ -140,41 +140,31 @@ __meta__ = {
 }
 
 [node name="Label4" type="Label" parent="Credits"]
-margin_left = 458.691
-margin_top = 66.6081
-margin_right = 1424.69
-margin_bottom = 169.608
-text = "Cradac"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 115.0
+margin_top = 82.0
+margin_right = 822.0
+margin_bottom = 361.0
+text = "Developed by
+============
 
-[node name="Label5" type="Label" parent="Credits"]
-margin_left = 81.0961
-margin_top = 225.0
-margin_right = 1047.1
-margin_bottom = 328.0
-text = "Cybermuell"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label6" type="Label" parent="Credits"]
-margin_left = 918.311
-margin_top = 299.953
-margin_right = 1884.31
-margin_bottom = 402.953
-text = "DorianSnowball"
+Cradac                | @cradmax
+Cybermuell
+DorianSnowball       | @DorianSnowball"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label7" type="Label" parent="Credits"]
-margin_left = 926.796
-margin_top = 565.826
-margin_right = 1892.8
-margin_bottom = 668.826
-text = "Zwerg Sprite Typ"
+margin_left = 737.384
+margin_top = 612.639
+margin_right = 1731.38
+margin_bottom = 891.639
+text = "Art
+===
+\"Pixel Art Dwarf Sprites\" by PixElthen licensed CC-BY 4.0
+some modifications were done
+https://opengameart.org/content/pixel-art-dwarf-sprites
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -19,6 +19,8 @@ export var fieldsize_height : int = 5
 export var tile_scaling = 2
 export var tile_basesize = 64
 
+export var intro_animation = true
+
 var field : = []
 
 
@@ -42,6 +44,10 @@ func _ready():
     drawField()
     yield(get_tree().create_timer(0.75), "timeout")
     spawnDwarf()
+    if intro_animation:
+        spawnAnimation()
+    else:
+        dwarf.in_spawn_animation = false
 
 func insertRow(left, rowIdx, tile):
     var row = field[rowIdx]
@@ -91,8 +97,9 @@ func generateRandomField():
     
     # hardcoding the starting tile
     $".".remove_child(field[0][0])
-    var starting_tile = tile_end_piece.instance()
-    starting_tile.rotate(-1.5707963268)
+    var starting_tile = tile_corner.instance()
+    tilePermutation(starting_tile, 0, 0, 2)
+    #starting_tile.rotate(2* -1.5707963268)
     starting_tile.scale = Vector2(tile_scaling, tile_scaling)
     starting_tile.position = Vector2(0,0)
     field[0][0] = starting_tile
@@ -103,28 +110,26 @@ func getRandomTile(pos, spawn):
     var tile : KinematicBody2D = tile_list[randi() % tile_list.size()].instance()
     tile.scale = Vector2(tile_scaling, tile_scaling)
     tile.position = pos
-    #print(str(tile))
-    #print(str(tile.hitbox))
-    randomTilePermutation(tile)
-    #print(str(tile.hitbox))
+    
+    tilePermutation(tile, randi() % 2, randi() % 2, randi() % 4)
     if spawn:
         $".".add_child(tile)
     return tile
     
-func randomTilePermutation(tile):
-    if randi() % 2 == 1:                                                        # 50% chance an der x achse spiegeln
+func tilePermutation(tile, y_mirror, x_mirror, rotation):
+    if y_mirror == 1:                                                           # 50% chance an der x achse spiegeln
         tile.scale.y *= -1
         var temp = tile.hitbox["top"]                                           # transform the hitbox dict with the thing itself
         tile.hitbox["top"] = tile.hitbox["bottom"]
         tile.hitbox["bottom"] = temp
     
-    if randi() % 2 == 1:                                                        # 50% chance an der y achse spiegeln
+    if x_mirror == 1:                                                           # 50% chance an der y achse spiegeln
         tile.scale.x *= -1
         var temp = tile.hitbox["left"]
         tile.hitbox["left"] = tile.hitbox["right"]
         tile.hitbox["right"] = temp
         
-    var rotation = randi() % 4                                                  # rotate the box by 90-360°
+                                                                                # rotate the box by 90-360°
     tile.rotate(rotation * 1.5707963268)
     for i in range(rotation):                                                   # rotate the hitbox too
         var top = tile.hitbox["top"]
@@ -189,8 +194,42 @@ func drawField():
 var dwarf = null
 func spawnDwarf():
     dwarf = load("res://Dwarf.tscn").instance()
-    dwarf.position = Vector2(32+(tile_basesize*tile_scaling), 32+(tile_basesize*tile_scaling))
-    $".".add_child(dwarf)
+    dwarf.position = Vector2(32+(tile_basesize*tile_scaling), 5)
+    #dwarf.position = Vector2(800,800)                                          # position outside of the gamebox
+    $".".add_child(dwarf)                                                       # use it to try out movement w/o gravity
+    
+func spawnAnimation():
+    while not dwarf.is_on_floor():
+        yield(get_tree().create_timer(.1),"timeout")
+    
+    dwarf._animated_sprite.play("landing2")
+    yield(get_tree().create_timer(.3),"timeout")
+    while dwarf._animated_sprite.frame != 0:
+        yield(get_tree().create_timer(.01),"timeout")
+    dwarf._animated_sprite.stop()
+    
+    dwarf.velocity.x = -20
+    dwarf._animated_sprite.flip_h = true
+    dwarf._animated_sprite.play("walk")
+    yield(get_tree().create_timer(1.2),"timeout")
+    
+    dwarf.velocity.x = 0
+    dwarf._animated_sprite.play("idle")
+    yield(get_tree().create_timer(0.8),"timeout")
+    
+    dwarf.velocity.x = 20
+    dwarf._animated_sprite.flip_h = false
+    dwarf._animated_sprite.play("walk")
+    yield(get_tree().create_timer(2.5),"timeout")
+    
+    dwarf.velocity.x = 0
+    dwarf._animated_sprite.play("idle")
+    
+    dwarf._speech_sprite.frame = 1
+    yield(get_tree().create_timer(1.5),"timeout")
+    dwarf._speech_sprite.frame = 0
+    dwarf.in_spawn_animation = false
+    
 
 func getRow(y):
     var row = int(y-tile_basesize) / (tile_basesize * tile_scaling)

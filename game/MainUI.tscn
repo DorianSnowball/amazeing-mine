@@ -68,10 +68,11 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="."]
-margin_left = 1065.0
-margin_top = 123.0
-margin_right = 1404.0
-margin_bottom = 215.0
+margin_left = 176.059
+margin_top = 905.218
+margin_right = 595.059
+margin_bottom = 997.218
+text = "End Game"
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false

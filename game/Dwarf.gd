@@ -5,6 +5,7 @@ var depth : int = 0
 
 # environment variables
 var speed : int = 200
+var climb_speed : int = 200
 var jumpforce : int = 400
 var gravity : int = 800
 
@@ -14,9 +15,10 @@ var last_y = 0
 
 var velocity : Vector2 = Vector2()
 
-#var vel_y : int = 0
-#var vel_y_old : int = 0
-#var previous_frame_floor : bool = true
+var on_rope : bool = false
+
+var in_spawn_animation : bool = true
+
 
 #onready var sprite : Sprite = get_node("Sprite")
 onready var gamefield = $"/root/Control/Gamefield"
@@ -24,6 +26,7 @@ var rope_object = load("res://Rope.tscn")
 onready var _animated_sprite = $AnimatedSprite
 onready var _magic_sprite = $"magic sprite"
 onready var _magic_sound = $poof
+onready var _speech_sprite = $"speech bubble"
 
 func get_input():
     
@@ -34,19 +37,20 @@ func get_input():
     elif Input.is_action_pressed("move_right"):
         velocity.x += speed                                                     # Make go fast
 
-    else:
-        _animated_sprite.play("idle")                                            # return to idle
         
     if Input.is_action_just_pressed("move_left"):
         _animated_sprite.flip_h = true                                          # spin guy in right direction
-        _animated_sprite.play("walk")                                           # sprite animation
+        if is_on_floor():
+            _animated_sprite.play("walk")                                           # sprite animation
     elif Input.is_action_just_pressed("move_right"):
         _animated_sprite.flip_h = false                                         # spin guy in right direction
-        _animated_sprite.play("walk")                                           # sprite animation
+        if is_on_floor():
+            _animated_sprite.play("walk")                                           # sprite animation
     
         # jump input
-    if Input.is_action_just_pressed("jump") and is_on_floor():
+    if Input.is_action_just_pressed("jump") and (is_on_floor() or on_rope):
         velocity.y -= jumpforce
+
         if velocity.x < 0:                                                      # backflip city
             for _x in range(30): #16
                 _animated_sprite.rotation_degrees += 360/30  #22.5
@@ -57,18 +61,40 @@ func get_input():
                 yield(get_tree().create_timer(0.4/30),"timeout")
     if Input.is_action_just_pressed("rope"):
         spawn_rope()
+    
+    if Input.is_action_pressed("climb_up") and on_rope:
+        velocity.y = climb_speed * -1
+    elif Input.is_action_pressed("climb_down") and on_rope:
+        velocity.y = climb_speed
+        
+    if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and not Input.is_action_pressed("climb_up") and not Input.is_action_pressed("climb_down") and is_on_floor():
+        _animated_sprite.play("idle")
+        
+    if Input.is_action_just_pressed("climb_up") and on_rope:
+        _animated_sprite.play("climb")                                           # sprite animation
+    elif Input.is_action_just_pressed("climb_down") and on_rope:
+        _animated_sprite.play("climb")  
+    
+    if Input.is_action_just_released("climb_up") or Input.is_action_just_released("climb_down"):
+        velocity.y = 0
+        
+        
 
 func _physics_process(delta):
-    velocity.x = 0
-    get_input()
+    if not in_spawn_animation:
+        velocity.x = 0
+        get_input()        
+        
     
     # applying the velocity
     velocity = move_and_slide(velocity, Vector2.UP)
     
     # gravity
-    velocity.y += gravity * delta
+    if not on_rope:
+        velocity.y += gravity * delta
     
-    #$"/root/Control/Score".text = "on wall: " + str(is_on_wall()) + "\non floor: " + str(is_on_floor()) + "\non ceiling: " + str(is_on_ceiling())
+    #$"/root/Control/Score".text = "Velocity" + str(velocity)
+    #$"/root/Control/Score".text = "Animation: " + _animated_sprite.animation
     checkScroll()
     teleport()
     check_stuck()

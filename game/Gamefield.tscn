@@ -6,5 +6,6 @@
 [node name="Gamefield" type="Node2D"]
 script = ExtResource( 2 )
 itemProb = 0.5
+intro_animation = false
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 1 )]
