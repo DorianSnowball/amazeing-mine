@@ -4,10 +4,15 @@ extends KinematicBody2D
 var depth : int = 0
 
 # environment variables
-var speed : int = 200
-var climb_speed : int = 200
-var jumpforce : int = 400
-var gravity : int = 800
+#var speed : int = 200
+export var top_speed : int = 200
+export var frame_counter : int = 0
+export var climb_speed : int = 200
+export var jumpforce : int = 250
+export var gravity : int = 800
+export var coyote_time : int = 6
+
+var frames_in_air : int = 0
 
 #no stuck
 var stuck_count = 0
@@ -28,14 +33,29 @@ onready var _magic_sprite = $"magic sprite"
 onready var _magic_sound = $poof
 onready var _speech_sprite = $"speech bubble"
 
-func get_input():
-    
+func get_input(delta):
+    if -3 <= velocity.x and velocity.x <= 3:                              # Dead Zone Detection
+        velocity.x = 0
+        frame_counter = 0
+        
     # movement input here
     if Input.is_action_pressed("move_left"):
-        velocity.x -= speed                                                     # Make go fast
+        frame_counter += 1
+        velocity.x = -6*(frame_counter*frame_counter)+1                                                     # Make go fast
         
     elif Input.is_action_pressed("move_right"):
-        velocity.x += speed                                                     # Make go fast
+        frame_counter += 1
+        velocity.x = 6*(frame_counter*frame_counter)+1                                                     # Make go fast
+        
+    
+    if Input.is_action_just_released("move_left") or Input.is_action_just_released("move_right"):
+        frame_counter = 0
+    
+    if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and velocity.x != 0:
+        frame_counter += 1
+        velocity.x = 2.45* pow((frame_counter-3), 4)
+        
+    print(velocity.x)
 
         
     if Input.is_action_just_pressed("move_left"):
@@ -47,8 +67,13 @@ func get_input():
         if is_on_floor():
             _animated_sprite.play("walk")                                           # sprite animation
     
-        # jump input
-    if Input.is_action_just_pressed("jump") and (is_on_floor() or on_rope):
+    if not is_on_floor():
+        frames_in_air += 1
+    else:
+        frames_in_air = 0
+    
+    # jump input
+    if Input.is_action_just_pressed("jump") and (frames_in_air <= coyote_time or on_rope):
         velocity.y -= jumpforce
 
         if velocity.x < 0:                                                      # backflip city
@@ -82,10 +107,13 @@ func get_input():
 
 func _physics_process(delta):
     if not in_spawn_animation:
-        velocity.x = 0
-        get_input()        
+        #velocity.x = 0
+        get_input(delta)        
         
-    
+    if velocity.x > top_speed:                                                  # restrict to top speed
+        velocity.x = top_speed
+    elif velocity.x < -1 * top_speed:
+        velocity.x = -1* top_speed
     # applying the velocity
     velocity = move_and_slide(velocity, Vector2.UP)
     
@@ -93,7 +121,7 @@ func _physics_process(delta):
     if not on_rope:
         velocity.y += gravity * delta
     
-    #$"/root/Control/Score".text = "Velocity" + str(velocity)
+    $"/root/Control/Score".text = "Velocity" + str(velocity)
     #$"/root/Control/Score".text = "Animation: " + _animated_sprite.animation
     checkScroll()
     teleport()
