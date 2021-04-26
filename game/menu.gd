@@ -62,12 +62,12 @@ func _ready():
     spawnAnimation()
 
 func _on_sfx_value_changed(value):
-    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), lin_to_db(value))
+    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear2db(value/100))
     $"Settings/sfx_value_label".bbcode_text = str(value)
 
 
 func _on_music_value_changed(value):
-    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), lin_to_db(value))
+    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(value/100))
     $"Settings/music_value_label".bbcode_text = str(value)
     
 func lin_to_db(value):
