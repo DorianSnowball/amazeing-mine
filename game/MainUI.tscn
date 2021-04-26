@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Gamefield.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Score.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://default_theme.tres" type="Theme" id=6]
 [ext_resource path="res://temp_trigger.gd" type="Script" id=7]
 [ext_resource path="res://Music.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Volume.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 470.046, 21.987 )
@@ -130,3 +131,10 @@ rotation = 0.316184
 shape = SubResource( 1 )
 
 [node name="Music" parent="." instance=ExtResource( 8 )]
+
+[node name="Volume" parent="." instance=ExtResource( 9 )]
+margin_left = 921.697
+margin_top = 608.46
+margin_right = 921.697
+margin_bottom = 434.46
+rect_scale = Vector2( 0.5201, 0.5201 )

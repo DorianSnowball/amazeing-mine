@@ -19,13 +19,21 @@ func _ready():
             if dir.current_is_dir():
                 print("Found directory: " + file_name)
             else:
-                if file_name.ends_with(".mp3"):
+                if file_name.ends_with(".mp3.import"):
+                    
                     var dir_path = dir.get_current_dir()
                     var fqn = (dir_path if dir_path.ends_with("/") else dir_path + "/")+file_name
-                    print("Loaded " + fqn)
-                    var stream = load(fqn) as AudioStreamMP3
-                    stream.loop = false
-                    tracks[fqn] = stream
+                    
+                    var config = ConfigFile.new()
+                    var err = config.load(fqn)
+                    if err == OK:
+                        var mp3_path = config.get_value("remap", "path", "null")
+                        print(mp3_path)
+                    
+                        print("Loaded " + mp3_path)
+                        var stream = load(mp3_path) as AudioStreamMP3
+                        stream.loop = false
+                        tracks[fqn] = stream
                 
             file_name = dir.get_next()
     else:
@@ -48,7 +56,7 @@ func start_play(audio):
  
 func next_level(level):
     if (level % 2 == 0):
-        var fqn = "res://Audio/Background/LD48_("+str(level+1)+").mp3"
+        var fqn = "res://Audio/Background/LD48_("+str(level+1)+").mp3.import"
         
         if fqn in tracks:
             #print("queued next level ", level+1)

@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Volume.gd" type="Script" id=2]
+
+[node name="Volume" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -174.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Volume_label" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -248.0
+margin_top = 250.0
+margin_right = 239.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][b]Volume"
+text = "Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfx_label" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -243.5
+margin_top = 5.5
+margin_right = 243.5
+margin_bottom = 106.5
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Soundeffects"
+text = "Soundeffects"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfx_value_label" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 528.0
+margin_top = 68.0
+margin_right = 592.0
+margin_bottom = 113.0
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]100"
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfx" type="HSlider" parent="."]
+margin_left = 464.0
+margin_top = 510.0
+margin_right = 964.0
+margin_bottom = 542.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 1 )
+value = 100.0
+rounded = true
+tick_count = 11
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music_label" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -243.5
+margin_top = 197.5
+margin_right = 243.5
+margin_bottom = 298.5
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Music"
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music_value_label" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 528.0
+margin_top = 260.0
+margin_right = 592.0
+margin_bottom = 305.0
+rect_pivot_offset = Vector2( -532.5, 430 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]100"
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music" type="HSlider" parent="."]
+margin_left = 465.782
+margin_top = 704.0
+margin_right = 965.782
+margin_bottom = 736.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 1 )
+value = 100.0
+rounded = true
+tick_count = 11
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="value_changed" from="sfx" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="music" to="." method="_on_music_value_changed"]

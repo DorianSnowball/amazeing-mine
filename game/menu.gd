@@ -7,7 +7,7 @@ func button_highscore():
     $"Highscore".visible = true
         
 func button_settings():
-    pass
+    $"Settings".visible = true
     
 func button_controls():
     $"Controls".visible = true
@@ -60,3 +60,6 @@ func _ready():
     $"ButtonQuit".connect("pressed",self,"button_quit")
     
     spawnAnimation()
+
+
+
