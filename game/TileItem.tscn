@@ -14,7 +14,6 @@ position = Vector2( -0.21022, 0 )
 scale = Vector2( 0.375, 0.375 )
 frames = ExtResource( 1 )
 animation = "chest"
-frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Sprite"]
