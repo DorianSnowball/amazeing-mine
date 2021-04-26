@@ -448,6 +448,7 @@ extents = Vector2( 9.53109, 16.9983 )
 
 [node name="Dwarf" type="KinematicBody2D"]
 position = Vector2( 1.41422, -11.6673 )
+collision_mask = 5
 script = ExtResource( 2 )
 coyote_time = 4
 delta_y = 0.1
