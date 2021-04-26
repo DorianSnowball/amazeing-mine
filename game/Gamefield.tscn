@@ -4,8 +4,9 @@
 [ext_resource path="res://Gamefield.gd" type="Script" id=2]
 
 [node name="Gamefield" type="Node2D"]
+position = Vector2( 0, -1 )
 script = ExtResource( 2 )
-itemProb = 0.5
 intro_animation = false
+itemProb = 0.5
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 1 )]
