@@ -20,7 +20,8 @@ func _ready():
                 print("Found directory: " + file_name)
             else:
                 if file_name.ends_with(".mp3"):
-                    var fqn = dir.get_current_dir()+"/"+file_name
+                    var dir_path = dir.get_current_dir()
+                    var fqn = (dir_path if dir_path.ends_with("/") else dir_path + "/")+file_name
                     print("Loaded " + fqn)
                     var stream = load(fqn) as AudioStreamMP3
                     stream.loop = false
