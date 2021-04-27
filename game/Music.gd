@@ -53,16 +53,18 @@ func start_play(audio):
     queued = audio
  #   player.loop = true
     
- 
+
+var music_level = 0
 func next_level(level):
     if (level % 2 == 0):
-        var fqn = "res://Audio/Background/LD48_("+str(level+1)+").mp3.import"
+        music_level += 1
+        var fqn = "res://Audio/Background/LD48_("+str(music_level)+").mp3.import"
         
         if fqn in tracks:
             #print("queued next level ", level+1)
             queued = fqn
         else:
-            print("no track for next level ", level+1)
+            print("no track for next level ", music_level)
 
 func _on_track_finished():
     #print("old track finished")
