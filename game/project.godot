@@ -14,8 +14,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ld48"
+config/name="aMAZEing mine"
 run/main_scene="res://menu.tscn"
+boot_splash/image="res://Sprites/title_card.png"
 config/icon="res://Sprites/logo.png"
 
 [autoload]

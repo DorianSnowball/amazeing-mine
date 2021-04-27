@@ -304,42 +304,49 @@ __meta__ = {
 [node name="Controls" type="RichTextLabel" parent="Controls"]
 anchor_right = 0.021
 anchor_bottom = 0.037
-margin_left = 161.56
-margin_top = 208.056
-margin_right = 1558.24
-margin_bottom = 663.096
+margin_left = 162.0
+margin_top = 208.0
+margin_right = 1558.68
+margin_bottom = 936.04
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
-bbcode_text = "[table=3]
+bbcode_text = "[table=4]
 	[cell][u]Main [/u]     [/cell]
 	[cell][u]Alternative[/u]          [/cell]
-	[cell][u]Functions[/u] [/cell]
+	[cell][u]Function[/u] [/cell]
+	[cell][/cell]
 	
 	[cell]A [/cell]
 	[cell]LEFT ARROW [/cell]
 	[cell]Move Left [/cell]
+	[cell][/cell]
 	
 	[cell]D [/cell]
 	[cell]RIGHT ARROW [/cell]
 	[cell]Move Right [/cell]
+	[cell][/cell]
 	
 	[cell]SPACE [/cell]
 	[cell] [/cell]
 	[cell]Jump [/cell]
+	[cell][/cell]
 	
 	[cell]R [/cell]
 	[cell] [/cell]
 	[cell]Throw Rope [/cell]
+	[cell]Only one per Screen[/cell]
 	
 	[cell]W [/cell]
 	[cell]UP ARROW [/cell]
 	[cell]Climb Up on Rope [/cell]
+	[cell][/cell]
 	
 	[cell]S [/cell]
 	[cell]DOWN ARROW [/cell]
 	[cell]Climb Down on Rope [/cell]
+	[cell][/cell]
 [/table]"
-text = "Main      Alternative          Functions A LEFT ARROW Move Left D RIGHT ARROW Move Right SPACE  Jump R  Throw Rope W UP ARROW Climb Up on Rope S DOWN ARROW Climb Down on Rope "
+text = "Main      Alternative          Function A LEFT ARROW Move Left D RIGHT ARROW Move Right SPACE  Jump R  Throw Rope Only one per ScreenW UP ARROW Climb Up on Rope S DOWN ARROW Climb Down on Rope "
 __meta__ = {
 "_edit_use_anchors_": false
 }
