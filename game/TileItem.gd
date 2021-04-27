@@ -27,9 +27,10 @@ func _on_Area2D_body_entered(body):
             $AudioStreamPlayer2D.stop()
         else:
             $"/root/Control/ItemList".add_tile($"/root/Control/Gamefield".getRandomTile(Vector2(0,0),false))
-            
-        call_deferred("delete", self)
+        
+        if get_parent(): 
+            call_deferred("delete", self)
 
 func delete(node):
-    get_parent().remove_child(node)
+    get_parent().remove_child (node)
     
