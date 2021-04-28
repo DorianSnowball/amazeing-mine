@@ -31,6 +31,10 @@ func _ready():
     # init 2d array
     start_time = OS.get_unix_time()
     Globals.start_time = start_time
+    Globals.score = 0
+    Globals.level = 0
+    
+    
     for x in range(fieldsize_height):
         field.append([])
         field[x]=[]        
