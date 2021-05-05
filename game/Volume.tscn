@@ -4,9 +4,14 @@
 [ext_resource path="res://Volume.gd" type="Script" id=2]
 
 [node name="Volume" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -174.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.891
+margin_top = -62.0
+margin_right = 959.109
+margin_bottom = 388.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -14,11 +19,13 @@ __meta__ = {
 
 [node name="Volume_label" type="RichTextLabel" parent="."]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -248.0
-margin_top = 250.0
-margin_right = 239.0
-margin_bottom = 360.0
+anchor_bottom = 0.5
+margin_left = -240.0
+margin_top = -213.0
+margin_right = 247.0
+margin_bottom = -103.0
 rect_pivot_offset = Vector2( -532.5, 430 )
 theme = ExtResource( 1 )
 bbcode_enabled = true
@@ -33,10 +40,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -243.5
-margin_top = 5.5
-margin_right = 243.5
-margin_bottom = 106.5
+margin_left = -231.056
+margin_top = -53.4768
+margin_right = 255.944
+margin_bottom = 47.5232
 rect_pivot_offset = Vector2( -532.5, 430 )
 theme = ExtResource( 1 )
 bbcode_enabled = true
@@ -51,10 +58,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 528.0
-margin_top = 68.0
-margin_right = 592.0
-margin_bottom = 113.0
+margin_left = 518.0
+margin_top = -5.0
+margin_right = 586.0
+margin_bottom = 40.0
 rect_pivot_offset = Vector2( -532.5, 430 )
 theme = ExtResource( 1 )
 bbcode_enabled = true
@@ -65,10 +72,14 @@ __meta__ = {
 }
 
 [node name="sfx" type="HSlider" parent="."]
-margin_left = 464.0
-margin_top = 510.0
-margin_right = 964.0
-margin_bottom = 542.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -487.982
+margin_top = -15.8909
+margin_right = 12.0179
+margin_bottom = 16.1091
 rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 1 )
 value = 100.0
@@ -84,10 +95,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -243.5
-margin_top = 197.5
-margin_right = 243.5
-margin_bottom = 298.5
+margin_left = -233.7
+margin_top = 78.409
+margin_right = 253.3
+margin_bottom = 179.409
 rect_pivot_offset = Vector2( -532.5, 430 )
 theme = ExtResource( 1 )
 bbcode_enabled = true
@@ -102,10 +113,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 528.0
-margin_top = 260.0
-margin_right = 592.0
-margin_bottom = 305.0
+margin_left = 518.0
+margin_top = 123.0
+margin_right = 589.0
+margin_bottom = 168.0
 rect_pivot_offset = Vector2( -532.5, 430 )
 theme = ExtResource( 1 )
 bbcode_enabled = true
@@ -116,10 +127,14 @@ __meta__ = {
 }
 
 [node name="music" type="HSlider" parent="."]
-margin_left = 465.782
-margin_top = 704.0
-margin_right = 965.782
-margin_bottom = 736.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -492.436
+margin_top = 110.527
+margin_right = 7.56384
+margin_bottom = 142.527
 rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 1 )
 value = 100.0

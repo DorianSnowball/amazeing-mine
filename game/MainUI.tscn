@@ -133,8 +133,8 @@ shape = SubResource( 1 )
 [node name="Music" parent="." instance=ExtResource( 8 )]
 
 [node name="Volume" parent="." instance=ExtResource( 9 )]
-margin_left = 921.697
-margin_top = 608.46
-margin_right = 921.697
-margin_bottom = 434.46
+margin_left = 105.889
+margin_top = 224.053
+margin_right = 105.889
+margin_bottom = 224.053
 rect_scale = Vector2( 0.5201, 0.5201 )
